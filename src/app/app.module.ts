@@ -55,7 +55,7 @@ import {
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [NavbarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

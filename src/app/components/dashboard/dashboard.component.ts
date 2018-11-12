@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public navbarComponent: NavbarComponent) { }
 
   ngOnInit() {
+  }
+
+  togglear() {
+    this.navbarComponent.togglear_sidebar();
   }
 
 }
