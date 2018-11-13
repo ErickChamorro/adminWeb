@@ -1,1 +1,99 @@
-@import "../../shared/navbar/navbar.component.css";
+.body {
+  z-index: -1;
+  background-image: url('../../../assets/imagenes/walluno.jpg');
+  width: 100%;
+  height: 100vh;
+  background-color: #09A1DA;
+  font-family: 'Google Sans', sans-serif;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+.error {
+  color: red;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.caja {
+  width: 70%;
+  padding: 7%;
+  margin-top: 15%;
+  /* background: #02547D; */
+  background: rgba(255, 255, 255, 0.5);
+  /* border-radius: 5px; */
+  /* border-top: 30px solid #02547d; */
+  /* box-shadow: 0px 3px 5px #252525; */
+}
+
+.lado-izquierdo {
+  color: white;
+  text-align: center;
+  align-items: center;
+  margin-top: 15%;
+}
+
+.lado-derecho {
+  text-align: center;
+}
+
+#btnIniciar {
+  width: 100%;
+  background-color: springgreen;
+  text-transform: uppercase;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+#btnIniciar:hover {
+  color: white;
+}
+
+#forgot {
+  text-decoration: none;
+  display: block;
+  color: #09A1DA;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  background: none;
+  border: none;
+  text-align: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#forgot:hover {
+  color: springgreen;
+  cursor: pointer;
+  -webkit-trasition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+@media screen and (max-width: 1110px) {
+  .lado-izquierdo {
+    padding-left: 40px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .lado-izquierdo {
+    display: none;
+  }
+
+  .lado-derecho {
+    margin-left: 12%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .lado-izquierdo {
+    display: none;
+  }
+
+  .lado-derecho {
+    margin-left: 0;
+  }
+}

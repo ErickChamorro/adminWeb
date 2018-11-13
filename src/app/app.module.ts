@@ -1,6 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, RouteReuseStrategy } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+
+// componentes de material (boton, forms e inputs)
+import {
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule
+} from '@angular/material';
 
 // COPONENTE DE RUTAS
 import { AppRoutingModule } from './app-routing.module';
@@ -12,18 +21,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { SharedComponent } from './shared/shared.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
-import { BodyComponent } from './components/home/body/body.component';
+import { ZonaComponent } from './components/dashboard/zona/zona.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ErrorPageComponent } from './components/error-page/error-page.component';
-import { FourCeroFourComponent } from './components/error-page/four-cero-four/four-cero-four.component';
-import { FiveHundredComponent } from './components/error-page/five-hundred/five-hundred.component';
 
-// componentes de material (boton, forms e inputs)
-import {
-  MatButtonModule,
-  MatFormFieldModule,
-  MatInputModule
-} from '@angular/material';
+// servicios
+import { UserService } from './servicios/user.service';
+import { Error404Component } from './components/error/error404/error404.component';
+import { Error401Component } from './components/error/error401/error401.component';
 
 @NgModule({
   declarations: [
@@ -31,11 +35,10 @@ import {
     HomeComponent,
     SharedComponent,
     NavbarComponent,
-    BodyComponent,
     DashboardComponent,
-    ErrorPageComponent,
-    FourCeroFourComponent,
-    FiveHundredComponent
+    ZonaComponent,
+    Error404Component,
+    Error401Component
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,9 @@ import {
 
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     RouterModule
   ],
   exports: [
@@ -55,7 +61,7 @@ import {
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [NavbarComponent],
+  providers: [NavbarComponent, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
