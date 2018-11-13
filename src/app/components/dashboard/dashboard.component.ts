@@ -15,7 +15,6 @@ import { ZonaInterface } from '../../models/zona';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  zonas: any;
   constructor(
     private funciones: FuncionesService,
     private apiService: ApiService,
@@ -32,12 +31,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     // la funcion viene del servicio de funciones. presione F12 con el cursor encima de "togglear_sidebar" para ver la funcion
-    this.funciones.togglear_sidebar();
-
-    this.apiService.get_zona().subscribe(data => {
-      console.log(data['Zonas']);
-      this.zonas = data['Zonas'];
-    });
   }
 
   llevame_a_zona() {

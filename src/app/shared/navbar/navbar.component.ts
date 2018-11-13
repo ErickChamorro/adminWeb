@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+declare var $: any;
 
 // services
 import { ApiService } from '../../servicios/dataApi/api.service';
 
 // interfaces
 import { CoordinadorInterface } from '../../models/coordinador';
+import { FuncionesService } from '../../servicios/funciones/funciones.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +20,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private funciones: FuncionesService
   ) {
     // las propiedades que tiene el array de "region"
     this.coordinador = {
@@ -38,11 +41,22 @@ export class NavbarComponent implements OnInit {
       console.log(data['region']);
       this.coordinador = data['region'];
     });
+
+    // nblagalva
+    this.togglear_sidebar();
   }
 
   cerrarSesion() {
     // es opcional que se haga un alert confirmando si se quiere cerrar sesion
     this.router.navigate(['']);
     localStorage.removeItem('token');
+  }
+
+  togglear_sidebar() {
+    $('#sidebarCollapse').on('click', function() {
+      $('#sidebar, #content').toggleClass('active');
+      $('.collapse.in').toggleClass('in');
+      $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
   }
 }
