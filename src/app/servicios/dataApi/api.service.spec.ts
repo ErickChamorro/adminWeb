@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ZonaService } from './zona.service';
+import { ApiService } from './api.service';
 
-describe('ZonaService', () => {
+describe('ApiService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ZonaService = TestBed.get(ZonaService);
+    const service: ApiService = TestBed.get(ApiService);
     expect(service).toBeTruthy();
   });
 });

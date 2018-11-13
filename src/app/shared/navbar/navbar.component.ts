@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-
-declare var $: any;
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ApiService } from '../../servicios/dataApi/api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,26 +8,14 @@ declare var $: any;
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  constructor( public router: Router, route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.togglear_sidebar();
-  }
-  togglear_sidebar() {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar, #content').toggleClass('active');
-        $('.collapse.in').toggleClass('in');
-        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    // esto es para mostrar el usuario coordinador y las zonas que él esté a cargo
+    // incluye una cabecera y se encuentra en servicio de API. presione F12 sobre la funcion "get_coordinador"
+    // para que te lleve directo a la funcion
+    this.apiService.get_coordinador().subscribe(data => {
+      console.log(data);
     });
   }
-
-  inicio() {
-    this.router.navigate(['']);
-  }
-
-  dashboard() {
-    this.router.navigate(['dashboard']);
-  }
-
 }

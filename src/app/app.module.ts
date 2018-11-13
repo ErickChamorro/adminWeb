@@ -1,8 +1,10 @@
+// modulos
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // componentes de material (boton, forms e inputs)
 import {
@@ -11,23 +13,23 @@ import {
   MatInputModule
 } from '@angular/material';
 
-// COPONENTE DE RUTAS
+// COMPONENTE DE RUTAS
 import { AppRoutingModule } from './app-routing.module';
 
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 // PAGINAS Y SUBPAGINAS
+import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { SharedComponent } from './shared/shared.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ZonaComponent } from './components/dashboard/zona/zona.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
-// servicios
-import { UserService } from './servicios/user.service';
 import { Error404Component } from './components/error/error404/error404.component';
 import { Error401Component } from './components/error/error401/error401.component';
+
+// servicios
+import { UserService } from './servicios/user/user.service';
+import { FuncionesService } from './servicios/funciones/funciones.service';
+import { ApiService } from './servicios/dataApi/api.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,7 @@ import { Error401Component } from './components/error/error401/error401.componen
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [NavbarComponent, UserService],
+  providers: [NavbarComponent, UserService, FuncionesService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
