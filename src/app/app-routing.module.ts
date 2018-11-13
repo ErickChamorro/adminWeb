@@ -12,8 +12,9 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: NavbarComponent,
     children: [
+      { path: '', component: DashboardComponent },
       { path: 'zona', component: ZonaComponent },
       { path: 'zonas', component: ZonasComponent }
     ]

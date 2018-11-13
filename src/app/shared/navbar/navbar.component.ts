@@ -8,7 +8,6 @@ import { ApiService } from '../../servicios/dataApi/api.service';
 
 // interfaces
 import { CoordinadorInterface } from '../../models/coordinador';
-import { FuncionesService } from '../../servicios/funciones/funciones.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,8 +19,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private apiService: ApiService,
-    private router: Router,
-    private funciones: FuncionesService
+    private router: Router
   ) {
     // las propiedades que tiene el array de "region"
     this.coordinador = {

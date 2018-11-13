@@ -28,7 +28,6 @@ import { Error401Component } from './components/error/error401/error401.componen
 
 // servicios
 import { UserService } from './servicios/user/user.service';
-import { FuncionesService } from './servicios/funciones/funciones.service';
 import { ApiService } from './servicios/dataApi/api.service';
 import { ZonasComponent } from './components/dashboard/zonas/zonas.component';
 
@@ -65,7 +64,7 @@ import { ZonasComponent } from './components/dashboard/zonas/zonas.component';
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [NavbarComponent, UserService, FuncionesService, ApiService],
+  providers: [NavbarComponent, UserService, ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

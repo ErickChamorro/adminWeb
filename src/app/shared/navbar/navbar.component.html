@@ -61,11 +61,16 @@
 
 <!-- Page Content -->
 <div id="content">
+
+  <!-- NAVBAR EL QUE TIENE EL BOTON AZUL EL TITULO DE INICIO Y TODO ESO -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <button type="button" id="sidebarCollapse" class="btn btn-info">
-        <i class="fas fa-align-left"></i> <span>Toggle</span>
+        <i class="fas fa-align-justify"></i>
       </button>
+      <a [routerLink]="['dashboard']">
+        <h4>Dashboard</h4>
+      </a>
       <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-align-justify"></i>
@@ -80,9 +85,9 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav><!-- #FIN NAVBAR -->
 
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+  <!-- AQUI SE CARGA EL CONTENIDO DE TODO COMPONENTE QUE SE CARGUE: (DASHBOARD / ZONADETALLE / PERFIL / USUARIOS....) -->
+  <router-outlet></router-outlet>
+
 </div>
