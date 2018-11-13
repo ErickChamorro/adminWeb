@@ -18,4 +18,10 @@ export class ApiService {
       'http://192.168.1.64/supervisores_api/public/api/HomeCoordinador';
     return this.http.get(api_url, { headers: this.headers });
   }
+
+  get_zona() {
+    const api_url =
+      'http://192.168.1.64/supervisores_api/public/api/HomeCoordinador';
+    return this.http.get(api_url, { headers: this.headers });
+  }
 }

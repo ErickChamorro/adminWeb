@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+// services
 import { ApiService } from '../../servicios/dataApi/api.service';
+
+// interfaces
 import { CoordinadorInterface } from '../../models/coordinador';
 
 @Component({
@@ -10,7 +15,11 @@ import { CoordinadorInterface } from '../../models/coordinador';
 })
 export class NavbarComponent implements OnInit {
   coordinador: CoordinadorInterface;
-  constructor(private http: HttpClient, private apiService: ApiService) {
+  constructor(
+    private http: HttpClient,
+    private apiService: ApiService,
+    private router: Router
+  ) {
     // las propiedades que tiene el array de "region"
     this.coordinador = {
       nombre: '',
@@ -29,5 +38,11 @@ export class NavbarComponent implements OnInit {
       console.log(data['region']);
       this.coordinador = data['region'];
     });
+  }
+
+  cerrarSesion() {
+    // es opcional que se haga un alert confirmando si se quiere cerrar sesion
+    this.router.navigate(['']);
+    localStorage.removeItem('token');
   }
 }

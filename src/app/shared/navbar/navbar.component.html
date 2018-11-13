@@ -2,6 +2,10 @@
   <!-- Sidebar  -->
   <nav id="sidebar">
     <div class="sidebar-header">
+      <div id="imagen" style="width: 100px; height: 100px;">
+        <img src="../../../assets/imagenes/user_icon.png" width="100" height="100" class="img img-circle img-responsive"
+          alt="coordinador photo" title="aqui va la foto del perfil del coordinador ese">
+      </div>
       <h6>Bienvenido:</h6>
       <h3>{{coordinador.nombre | titlecase }} {{coordinador.apellido | titlecase }}</h3>
     </div>
@@ -49,7 +53,7 @@
 
     <ul class="list-unstyled CTAs">
       <li>
-        <a href="#" class="download">Cerrar sesión</a>
+        <a href="#" class="download" [routerLink]="''" (click)="cerrarSesion()">Cerrar sesión</a>
       </li>
     </ul>
   </nav>
