@@ -1,7 +1,7 @@
 export interface CoordinadorInterface {
-  apellido: '';
-  id_cordinador: '';
-  id_region: '';
-  nombre: '';
-  region: '';
+  apellido: string;
+  id_cordinador: number;
+  id_region: number;
+  nombre: string;
+  region: string;
 }

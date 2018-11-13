@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../servicios/dataApi/api.service';
+import { CoordinadorInterface } from '../../models/coordinador';
 
 @Component({
   selector: 'app-navbar',
@@ -8,14 +9,14 @@ import { ApiService } from '../../servicios/dataApi/api.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  coordinador: any;
+  coordinador: CoordinadorInterface;
   constructor(private http: HttpClient, private apiService: ApiService) {
     // las propiedades que tiene el array de "region"
     this.coordinador = {
       nombre: '',
       apellido: '',
-      id_cordinador: '',
-      id_region: '',
+      id_cordinador: null,
+      id_region: null,
       region: ''
     };
   }
