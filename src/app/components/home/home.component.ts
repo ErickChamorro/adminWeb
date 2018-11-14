@@ -13,6 +13,8 @@ import swal from 'sweetalert2';
 export class HomeComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
+  // username: any;
+  // password: any;
   respuesta: any;
   public respuesta_servidor: boolean;
   disabled: boolean;
@@ -70,20 +72,19 @@ export class HomeComponent implements OnInit {
           const token = data['access_token'];
           localStorage.setItem('token', token);
           this.http
-            .get('http://192.168.1.64/supervisores_api/public/api/dashboard', {
-              headers: new HttpHeaders({
-                Accept: 'application/json',
-                Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
-              })
-            })
-            .subscribe(textos => {
-              console.log(textos);
-              if (textos !== 'ruta/coordinadores') {
-                this.router.navigate(['/error/error401']);
-              } else {
-                this.router.navigate(['/dashboard']);
-                console.log('bienvenido coordinador');
+            .get(
+              'http://192.168.1.64/supervisores_api/public/api/HomeCoordinador',
+              {
+                headers: new HttpHeaders({
+                  Accept: 'application/json',
+                  Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
+                })
               }
+            )
+            .subscribe(textos => {
+              // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
+              // HASTA AHORA SOLO INGRESA SIN VALIDAR PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
+              this.router.navigate(['/dashboard']);
             });
           // console.log('POST request is successfull', data);
           // console.log('status: ', status);
@@ -102,6 +103,9 @@ export class HomeComponent implements OnInit {
             localStorage.clear();
             console.log(error);
           }
+          if (error.status === 404) {
+            this.router.navigate(['/error/404']);
+          }
           if (error.status === 401) {
             swal({
               title: 'Error',
@@ -116,10 +120,7 @@ export class HomeComponent implements OnInit {
               text: 'Algo raro pasa... ' + JSON.stringify(error),
               type: 'error'
             });
-            console.log(
-              'algo pasa con el servidor de alguien...',
-              JSON.stringify(error)
-            );
+            console.log(JSON.stringify(error));
           }
         }
       );

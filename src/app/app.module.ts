@@ -6,11 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// componentes de material (boton, forms e inputs)
+// componentes de material (boton, forms, menus e inputs)
 import {
   MatButtonModule,
   MatFormFieldModule,
-  MatInputModule
+  MatMenuModule,
+  MatInputModule,
+  MatIconModule
 } from '@angular/material';
 
 // COMPONENTE DE RUTAS
@@ -44,10 +46,12 @@ import { ApiService } from './servicios/dataApi/api.service';
   imports: [
     BrowserModule,
 
-    // material buttons, forms, inputs
+    // material buttons, forms, menus, iconos, inputs
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
+    MatIconModule,
 
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -57,9 +61,11 @@ import { ApiService } from './servicios/dataApi/api.service';
     RouterModule
   ],
   exports: [
-    // material buttons, forms, inputs
+    // material buttons, forms, menus, iconos, inputs
     MatButtonModule,
     MatFormFieldModule,
+    MatMenuModule,
+    MatIconModule,
     MatInputModule
   ],
   providers: [NavbarComponent, UserService, ApiService],

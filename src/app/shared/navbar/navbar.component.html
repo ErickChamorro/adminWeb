@@ -71,24 +71,28 @@
       <a id="logo_grande" [routerLink]="['/dashboard']">
         <h4>Dashboard</h4>
       </a>
-      <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+
+      <!-- BOTON QUE APARECE AL PONERSE EN MODO TELEFONO: BOTON TOGGLE NAVBAR (OJO: NO ES DEL SIDEBAR) -->
+      <!-- <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-align-justify"></i>
-      </button>
+      </button> -->
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
           <li class="nav-item"><a class="nav-link nav-logo" style="float: left;" [routerLink]="['/dashboard']">Dashboard</a></li>
           <li class="nav-item active"><a class="nav-link" href="#">Page</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
+          <li class="nav-item"><a mat-icon-button class="nav-link" href="#">
+              <mat-icon>notifications</mat-icon>
+            </a></li>
           <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </nav><!-- #FIN NAVBAR -->
 
-  <!-- AQUI SE CARGA EL CONTENIDO DE TODO COMPONENTE QUE SE CARGUE: (DASHBOARD / ZONADETALLE / PERFIL / USUARIOS....) -->
+  <!-- AQUI VA EL CONTENIDO DE TODO COMPONENTE QUE SE CARGUE: (DASHBOARD / ZONADETALLE / PERFIL / USUARIOS....) -->
   <router-outlet></router-outlet>
 
 </div>
