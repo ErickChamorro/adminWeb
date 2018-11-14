@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +30,6 @@ export class ApiService {
   // segun la zona que haya escogido el coordinador muestra la lista de droguerias que corresponde a la zona
   get_detalle_zona(id_zona: number) {
     const api_url = `http://192.168.1.64/supervisores_api/public/api/sucursalesZona/${id_zona}`;
-    return this.http.get(api_url, { headers: this.headers }).pipe(
-      map(res => {
-        return res;
-      })
-    );
+    return this.http.get(api_url, { headers: this.headers });
   }
 }
