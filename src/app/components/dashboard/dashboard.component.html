@@ -11,7 +11,7 @@
         <div class="card-title">Zona: {{zona.descripcion_zona}}</div>
         <h6 class="card-subtitle mb-2 text-muted">Supervisor a cargo: {{zona.supervisor}}</h6>
         <!-- aqui podria ir un texto -->
-        <a class="card-link" [routerLink]="['zona']">Ver
+        <a class="card-link" [routerLink]="['zona', zona.id_zona]">Ver
           zona</a>
         <a href="#" class="card-link">Another link</a>
       </div>

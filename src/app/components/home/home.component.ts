@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
               title: 'Error',
               text:
                 'Error interno del servidor. (internal server) Error: ' +
-                error.status,
+                JSON.stringify(error.status),
               type: 'error'
             });
             localStorage.clear();
@@ -113,10 +113,13 @@ export class HomeComponent implements OnInit {
           } else {
             swal({
               title: 'Error',
-              text: 'Algo raro pasa... ' + error,
+              text: 'Algo raro pasa... ' + JSON.stringify(error),
               type: 'error'
             });
-            console.log('algo pasa con el servidor de alguien...', error);
+            console.log(
+              'algo pasa con el servidor de alguien...',
+              JSON.stringify(error)
+            );
           }
         }
       );

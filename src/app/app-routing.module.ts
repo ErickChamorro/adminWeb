@@ -6,7 +6,6 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ZonaComponent } from './components/dashboard/zona/zona.component';
 import { Error404Component } from './components/error/error404/error404.component';
 import { Error401Component } from './components/error/error401/error401.component';
-import { ZonasComponent } from './components/dashboard/zonas/zonas.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,8 +14,7 @@ const routes: Routes = [
     component: NavbarComponent,
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'zona', component: ZonaComponent },
-      { path: 'zonas', component: ZonasComponent }
+      { path: 'zona/:id', component: ZonaComponent }
     ]
   },
   { path: 'error/404', component: Error404Component },

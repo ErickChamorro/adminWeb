@@ -47,6 +47,7 @@ a:focus {
 
 #sidebar {
   width: 250px;
+  padding: 10px;
   position: fixed;
   top: 0;
   left: 0;
@@ -118,7 +119,7 @@ ul.CTAs {
 ul.CTAs a {
   position: absolute;
   bottom: 1%;
-  width: 85%;
+  width: 75%;
   text-align: center;
   font-size: 0.9em !important;
   display: block;
@@ -127,8 +128,19 @@ ul.CTAs a {
 }
 
 a.download {
-  background: #fff;
-  color: #7386D5;
+  background: none;
+  color: white;
+  border: 1px solid white;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+a.download:hover {
+  background: white;
+  color: #6d7fcc;
 }
 
 a.article,
@@ -159,13 +171,31 @@ a.article:hover {
   display: none;
 }
 
+.nav-logo {
+  display: none;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
 
+@media (max-width: 991px) {
+  .nav-logo {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   #sidebar {
     margin-left: -250px;
+  }
+
+  .nav-logo {
+    display: block;
+  }
+
+  #logo_grande {
+    display: none;
   }
 
   #sidebar.active {
@@ -183,4 +213,6 @@ a.article:hover {
   #sidebarCollapse {
     display: inline-block;
   }
+
+
 }

@@ -68,7 +68,7 @@
       <button type="button" id="sidebarCollapse" class="btn btn-info">
         <i class="fas fa-align-justify"></i>
       </button>
-      <a [routerLink]="['dashboard']">
+      <a id="logo_grande" [routerLink]="['/dashboard']">
         <h4>Dashboard</h4>
       </a>
       <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -78,6 +78,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link nav-logo" style="float: left;" [routerLink]="['/dashboard']">Dashboard</a></li>
           <li class="nav-item active"><a class="nav-link" href="#">Page</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Page</a></li>

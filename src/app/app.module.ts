@@ -29,7 +29,6 @@ import { Error401Component } from './components/error/error401/error401.componen
 // servicios
 import { UserService } from './servicios/user/user.service';
 import { ApiService } from './servicios/dataApi/api.service';
-import { ZonasComponent } from './components/dashboard/zonas/zonas.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +39,7 @@ import { ZonasComponent } from './components/dashboard/zonas/zonas.component';
     DashboardComponent,
     ZonaComponent,
     Error404Component,
-    Error401Component,
-    ZonasComponent
+    Error401Component
   ],
   imports: [
     BrowserModule,

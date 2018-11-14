@@ -15,10 +15,10 @@ import { ZonaInterface } from '../../models/zona';
 })
 export class DashboardComponent implements OnInit {
   zonas: any;
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(private apiService: ApiService) {
     this.apiService.get_zona().subscribe(data => {
-      console.log(data['Zonas']);
       this.zonas = data['Zonas'];
+      console.log(data['Zonas']);
     });
   }
 
