@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
+import { ApiService } from '../../servicios/dataApi/api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,10 @@ import swal from 'sweetalert2';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  ip = 'http://192.168.1.4'; // servidor SENTOS
+  // ip = 'http://192.168.1.64';    // servidor cudris
   loginForm: FormGroup;
   submitted = false;
-  // username: any;
-  // password: any;
-  ip = '192.168.1.4'; // servidor SENTOS
-  // ip = '192.168.1.64';    // servidor cudris
   respuesta: any;
   public respuesta_servidor: boolean;
   disabled: boolean;
@@ -27,10 +26,11 @@ export class HomeComponent implements OnInit {
     public http: HttpClient,
     public location: Location,
     public router: Router,
-    route: ActivatedRoute
+    private apiService: ApiService
   ) {
     this.respuesta_servidor = true;
 
+    // validador del formulario de login
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
       password: [
@@ -41,26 +41,34 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // para desacivar el boton al cargar la pagina
+    // para desactivar el boton al cargar la pagina
+    // despues se pondrá en true hasta que los datos que se haya llenado en el formulario sean validos
     this.disabled = true;
   }
+
+  // accede a los controles de loginform
   get form() {
     return this.loginForm.controls;
   }
 
+  // metodo que se ejecuta al presionar el boton de iniciar en el HTML
   iniciarSesion() {
     this.submitted = true;
+
+    // se volvera desactivar el boton para prevenir que el usuario clickee mas de una vez
     this.disabled = true;
 
     // si formulario es invalido
     if (this.loginForm.invalid) {
+      // opcional si se quiere poner un SWEETALERT o dejar el alert ordinario
       alert('aqui falta algo...');
       return;
     }
 
+    // hacer el post al api para comprobar que usuario existe para recibir el TOKEN
     this.http
       .post(
-        `http://${this.ip}/supervisores_api/public/api/login`,
+        `${this.ip}/supervisores_api/public/api/login`,
         JSON.stringify(this.loginForm.value),
         {
           headers: new HttpHeaders({
@@ -71,63 +79,54 @@ export class HomeComponent implements OnInit {
       )
       .subscribe(
         data => {
+          // variable que guarda el dato del token que recibió de la respuesta del servidor
           const token = data['access_token'];
+          // se debe asignar al local Storage el token para que se use después...
           localStorage.setItem('token', token);
-          this.http
-            .get(
-              `http://${this.ip}/supervisores_api/public/api/HomeCoordinador`,
-              {
-                headers: new HttpHeaders({
-                  Accept: 'application/json',
-                  Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
-                })
-              }
-            )
-            .subscribe(textos => {
-              // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
-              // HASTA AHORA SOLO INGRESA SIN VALIDAR PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
-              this.router.navigate(['/dashboard']);
-            });
-          // console.log('POST request is successfull', data);
-          // console.log('status: ', status);
-          // this.respuesta = data;
-          // this.respuesta_servidor = false;
+          // usar la siguiente api para que usuario acceda al dashboard segun sea su rol
+          // para eso se debe tener el token que está guardado en el Local Storage
+          this.apiService.get_coordinador_y_zona().subscribe(datos => {
+            // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
+            // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
+            this.router.navigate(['/dashboard']);
+          });
         },
         error => {
+          // PARA ERROR CON STATUS 500: INTERNAL SERVER ERROR (error interno del servidor)
           if (error.status === 500) {
             swal({
               title: 'Error',
-              text:
-                'Error interno del servidor. (internal server) Error: ' +
-                JSON.stringify(error.status),
+              text: 'Error interno del servidor. (internal server) Error: ',
               type: 'error'
             });
             localStorage.clear();
-            console.log(error);
-          }
+            console.log('un error 500: (error interno del servidor)');
+          } // PARA ERROR 404: PAGE NOT FOUND (PAGINA NO ENCONTRADA)
           if (error.status === 404) {
+            // para éste no mostrará error en ninguna parte, solo redirigirá a una pagina diseñada para ésto
             this.router.navigate(['/error/404']);
           }
+          // ERROR 401: UNAUTHORIZED (NO AUTORIZADO)
           if (error.status === 401) {
             swal({
               title: 'Error',
-              text:
-                'Usuario y/o contraseña incorrectos. Error: ' + error.status,
+              text: 'Usuario y/o contraseña incorrectos.',
               type: 'error'
             });
-            console.log('un 401');
+            console.log('un error 401 (no autorizado)');
           } else {
             swal({
               title: 'Error',
-              text: 'Algo raro pasa... ' + JSON.stringify(error),
+              text: 'Algo raro pasa... ',
               type: 'error'
             });
-            console.log(JSON.stringify(error));
+            // console.log(JSON.stringify(error));
           }
         }
       );
   }
 
+  // metodo que se cumple al presionar el boton de "olvide mi contraseña"
   olvide_mi_contrasenia() {
     swal({
       title: 'Reestablecer contraseña',

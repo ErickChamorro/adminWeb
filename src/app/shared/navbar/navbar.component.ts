@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 declare var $: any;
 
@@ -16,11 +15,7 @@ import { CoordinadorInterface } from '../../models/coordinador';
 })
 export class NavbarComponent implements OnInit {
   coordinador: CoordinadorInterface;
-  constructor(
-    private http: HttpClient,
-    private apiService: ApiService,
-    private router: Router
-  ) {
+  constructor(private apiService: ApiService, private router: Router) {
     // las propiedades que tiene el array de "region"
     this.coordinador = {
       nombre: '',
@@ -33,17 +28,21 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     // esto es para mostrar el usuario coordinador y las zonas que él esté a cargo
-    // incluye una cabecera y se encuentra en servicio de API. presione F12 sobre la funcion "get_coordinador"
+    // incluye una cabecera y se encuentra en servicio de API. presione F12 sobre la funcion "get_coordinador_y_zona"
     // para que te lleve directo a la funcion
-    this.apiService.get_coordinador().subscribe(data => {
-      console.log(data['region']);
+    this.apiService.get_coordinador_y_zona().subscribe(data => {
       this.coordinador = data['region'];
+
+      // si quieres ver la region y que coordinador está a cargo, descomenta la linea de abajo
+      // console.log(this.coordinador);
     });
 
-    // nblagalva
+    // funcion que tiene que inicializarse para que la sidebar pueda mostrarse ya que no se mostrará cuando este en modo telefono
+    // y en vez de eso aparece un boton en la navbar
     this.togglear_sidebar();
   }
 
+  // este metodo esta funcionando en los botones de cerrar sesion
   cerrarSesion() {
     // es opcional que se haga un alert confirmando si se quiere cerrar sesion
     this.router.navigate(['']);

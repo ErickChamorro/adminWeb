@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 // servicios
 import { ApiService } from '../../../servicios/dataApi/api.service';
-import { ZonaInterface } from '../../../models/zona';
 
 @Component({
   selector: 'app-zona',
@@ -11,25 +10,31 @@ import { ZonaInterface } from '../../../models/zona';
   styleUrls: ['./zona.component.css']
 })
 export class ZonaComponent implements OnInit {
+  // data que extrae del api de sucursales
   sucursales: any;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {
-    // this.apiService.get_detalle_zona(this.id_zona).subscribe(data => {
-    //   console.log(data);
-    // });
-  }
+  // variable que contiene el nombre de la zona que se mostrara en este componente
+  parametro_id_zona = '';
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    // funcion que muestra el listado de droguerias de la zona
     this.listar_droguerias();
   }
 
   listar_droguerias() {
+    // funcion para gestionar parametros
     this.route.params.subscribe(data => {
+      // tener api de sucursales
       this.apiService.get_detalle_zona(data['id']).subscribe(sucursales => {
+        // variable donde se guarda el array que muestre las droguerias
         this.sucursales = sucursales['sucursal'];
-        console.log(sucursales['sucursal']);
+        // variable donde guarda el nombre de la drogueria
+        this.parametro_id_zona = sucursales['zona']['descripcion_zona'];
+
+        // si quieres ver que nombre aparece en la consola descomenta la linea de abajo
+        // console.log(this.parametro_id_zona);
       });
     });
-    // console.log(this.apiService.get_detalle_zona(this.id_sucursales));
   }
 }
