@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   submitted = false;
   // username: any;
   // password: any;
+  ip = '192.168.1.4'; // servidor SENTOS
+  // ip = '192.168.1.64';    // servidor cudris
   respuesta: any;
   public respuesta_servidor: boolean;
   disabled: boolean;
@@ -58,7 +60,7 @@ export class HomeComponent implements OnInit {
 
     this.http
       .post(
-        'http://192.168.1.64/supervisores_api/public/api/login',
+        `http://${this.ip}/supervisores_api/public/api/login`,
         JSON.stringify(this.loginForm.value),
         {
           headers: new HttpHeaders({
@@ -73,7 +75,7 @@ export class HomeComponent implements OnInit {
           localStorage.setItem('token', token);
           this.http
             .get(
-              'http://192.168.1.64/supervisores_api/public/api/HomeCoordinador',
+              `http://${this.ip}/supervisores_api/public/api/HomeCoordinador`,
               {
                 headers: new HttpHeaders({
                   Accept: 'application/json',

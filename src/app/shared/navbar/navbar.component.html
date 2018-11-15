@@ -69,26 +69,30 @@
         <i class="fas fa-align-justify"></i>
       </button>
       <a id="logo_grande" [routerLink]="['/dashboard']">
-        <h4>Dashboard</h4>
+        <h4>
+          <i class="fas fa-home"></i>
+          Dashboard
+        </h4>
       </a>
 
       <!-- BOTON QUE APARECE AL PONERSE EN MODO TELEFONO: BOTON TOGGLE NAVBAR (OJO: NO ES DEL SIDEBAR) -->
-      <!-- <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      <button class="btn d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-align-justify"></i>
-      </button> -->
+        <i class="fas fa-bars"></i>
+      </button>
 
-      <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link nav-logo" style="float: left;" [routerLink]="['/dashboard']">Dashboard</a></li>
-          <li class="nav-item active"><a class="nav-link" href="#">Page</a></li>
-          <li class="nav-item"><a mat-icon-button class="nav-link" href="#">
-              <mat-icon>notifications</mat-icon>
-            </a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
+          <li class="nav-item"><a class="nav-link nav-logo" style="float: left;" [routerLink]="['/dashboard']"><i class="fas fa-home"></i>
+              Dashboard</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#"><i class="fas fa-id-card"></i> Perfil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-envelope"></i> Bandeja de mensajes</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="#">Page</a></li> -->
+          <li class="nav-item"><a class="nav-link" [routerLink]="''" (click)="cerrarSesion()"><i class="fas fa-power-off"></i>
+              Cerrar
+              sesión</a></li>
         </ul>
-      </div> -->
+      </div>
     </div>
   </nav><!-- #FIN NAVBAR -->
 

@@ -31,6 +31,7 @@ import { Error401Component } from './components/error/error401/error401.componen
 // servicios
 import { UserService } from './servicios/user/user.service';
 import { ApiService } from './servicios/dataApi/api.service';
+import { PlanesformComponent } from './components/dashboard/zona/planesform/planesform.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ApiService } from './servicios/dataApi/api.service';
     DashboardComponent,
     ZonaComponent,
     Error404Component,
-    Error401Component
+    Error401Component,
+    PlanesformComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ZonaComponent } from './components/dashboard/zona/zona.component';
 import { Error404Component } from './components/error/error404/error404.component';
 import { Error401Component } from './components/error/error401/error401.component';
+import { PlanesformComponent } from './components/dashboard/zona/planesform/planesform.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,7 +15,11 @@ const routes: Routes = [
     component: NavbarComponent,
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'zona/:id', component: ZonaComponent }
+      { path: 'zona/:id', component: ZonaComponent },
+      {
+        path: 'formulario_planes_de_trabajo',
+        component: PlanesformComponent
+      }
     ]
   },
   { path: 'error/404', component: Error404Component },
