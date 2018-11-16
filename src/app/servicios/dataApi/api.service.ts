@@ -41,7 +41,7 @@ export class ApiService {
   get_current_user() {
     const user_string = localStorage.getItem('CurrentUser');
     if (!isNullOrUndefined(user_string)) {
-      const user: CoordinadorInterface = JSON.parse(user_string);
+      const user = user_string;
       return user;
     } else {
       return null;

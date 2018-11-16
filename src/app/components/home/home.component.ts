@@ -108,10 +108,7 @@ export class HomeComponent implements OnInit {
             // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
             this.router.navigate(['/dashboard']);
             this.current_user = datos['region']['nombre'];
-            localStorage.setItem(
-              'CurrentUser',
-              JSON.stringify(this.current_user)
-            );
+            localStorage.setItem('CurrentUser', this.current_user);
           });
         },
         // *****************************    GESTION DE ERRORES   *****************************************
