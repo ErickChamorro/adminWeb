@@ -39,12 +39,12 @@
                 el (data-keyboard="false") es para prevenir que el modal se cierre usando la tecla de ESC
               -->
             <!-- y el (data-backdrop="static") es para prevenir que el modal se cierre clickeando afuera de él. -->
-            <button mat-menu-item data-toggle="modal" data-target="#exampleModalCenter" data-keyboard="false"
+            <button mat-menu-item data-toggle="modal" data-target=".bd-example-modal-lg" data-keyboard="false"
               data-backdrop="static">
               <mat-icon>add</mat-icon>
               <span>Crear plan de trabajo</span>
             </button>
-            <button mat-menu-item data-toggle="modal" data-target="#exampleModalCenter" data-keyboard="false"
+            <button mat-menu-item data-toggle="modal" data-target=".bd-example-modal-lg" data-keyboard="false"
               data-backdrop="static">
               <mat-icon>visibility</mat-icon>
               <span>Ver planes de trabajo</span>
@@ -63,9 +63,9 @@
   </table>
 
   <!-- modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">
