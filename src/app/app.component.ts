@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AdminWeb';
+  title =
+    'AdminWeb - Sistema de gestion de planes de trabajo para supervisores';
 }

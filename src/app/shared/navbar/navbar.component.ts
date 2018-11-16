@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 declare var $: any;
 
 // services
@@ -15,7 +16,11 @@ import { CoordinadorInterface } from '../../models/coordinador';
 })
 export class NavbarComponent implements OnInit {
   coordinador: CoordinadorInterface;
-  constructor(private apiService: ApiService, private router: Router) {
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private http: HttpClient
+  ) {
     // las propiedades que tiene el array de "region"
     this.coordinador = {
       nombre: '',
@@ -43,10 +48,24 @@ export class NavbarComponent implements OnInit {
   }
 
   // este metodo esta funcionando en los botones de cerrar sesion
+  // **************************************      LOGOUT       *******************************************
   cerrarSesion() {
     // es opcional que se haga un alert confirmando si se quiere cerrar sesion
-    this.router.navigate(['']);
+    // const token = localStorage.getItem('token');
+    // const api_url = `${this.apiService.ip}/nombre_de_api/logout/${token}`;
     localStorage.removeItem('token');
+    localStorage.removeItem('CurrentUser');
+    this.router.navigate(['']);
+    // SE REQUIERE DE ALGUNA API QUE GESTIONE EL LOGOUT PARA ELIMINAR EL TOKEN EN EL SERVIDOR
+    // this.http.post<CoordinadorInterface>(api_url, {
+    //   headers: new HttpHeaders({
+    //     Authorization: 'Access',
+    //     'Content-Type': 'application/json'
+    //   })
+    // })
+    // .subscribe(respuesta => {
+    //   console.log(respuesta);
+    // });
   }
 
   togglear_sidebar() {

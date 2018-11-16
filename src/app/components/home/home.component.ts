@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
 import { ApiService } from '../../servicios/dataApi/api.service';
+import { CoordinadorInterface } from '../../models/coordinador';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,12 @@ export class HomeComponent implements OnInit {
   public respuesta_servidor: boolean;
   disabled: boolean;
   data: any;
+  usuario_coordinador: CoordinadorInterface;
+
+  datos_nombre_coordinador: any;
+  datos_apellido_coordinador: any;
+  datos_region_coordinador: any;
+  current_user: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,6 +35,15 @@ export class HomeComponent implements OnInit {
     public router: Router,
     private apiService: ApiService
   ) {
+    // extrae las propiedades de la interface de coordinador para usarla en el proceso de logado
+    this.usuario_coordinador = {
+      apellido: '',
+      id_cordinador: 0,
+      id_region: 0,
+      nombre: '',
+      region: ''
+    };
+
     this.respuesta_servidor = true;
 
     // validador del formulario de login
@@ -52,6 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   // metodo que se ejecuta al presionar el boton de iniciar en el HTML
+  // *******************************      LOGIN (el LOGOUT está en navbar.component.ts )       *************************
   iniciarSesion() {
     this.submitted = true;
 
@@ -69,6 +86,7 @@ export class HomeComponent implements OnInit {
     this.http
       .post(
         `${this.ip}/supervisores_api/public/api/login`,
+        // parametros extraidos del HTML
         JSON.stringify(this.loginForm.value),
         {
           headers: new HttpHeaders({
@@ -89,8 +107,14 @@ export class HomeComponent implements OnInit {
             // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
             // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
             this.router.navigate(['/dashboard']);
+            this.current_user = datos['region']['nombre'];
+            localStorage.setItem(
+              'CurrentUser',
+              JSON.stringify(this.current_user)
+            );
           });
         },
+        // *****************************    GESTION DE ERRORES   *****************************************
         error => {
           // PARA ERROR CON STATUS 500: INTERNAL SERVER ERROR (error interno del servidor)
           if (error.status === 500) {
