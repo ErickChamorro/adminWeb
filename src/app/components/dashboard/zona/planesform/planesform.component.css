@@ -1,1 +1,12 @@
+.contenedor-tabla {
+  border: 3px dashed dodgerblue;
+  padding: 80px;
+  width: 60%;
+  position: fixed;
+  top: 10%;
+  left: 20%;
+}
 
+.thead-dark {
+  border-radius: 10px;
+}

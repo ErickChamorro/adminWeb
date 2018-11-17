@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 
 // servicios
 import { ApiService } from '../servicios/dataApi/api.service';

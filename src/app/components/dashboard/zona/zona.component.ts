@@ -16,11 +16,7 @@ export class ZonaComponent implements OnInit {
 
   // variable que contiene el nombre de la zona que se mostrara en este componente
   parametro_id_zona = '';
-  constructor(
-    private apiService: ApiService,
-    private route: ActivatedRoute,
-    private navbar: NavbarComponent
-  ) {}
+  constructor(private route: ActivatedRoute, private navbar: NavbarComponent) {}
 
   ngOnInit() {
     // funcion que muestra el listado de droguerias de la zona
@@ -36,8 +32,6 @@ export class ZonaComponent implements OnInit {
         this.sucursales = sucursales['sucursal'];
         // variable donde guarda el nombre de la zona
         this.parametro_id_zona = sucursales['zona']['descripcion_zona'];
-        // this.nombre_sucursal = sucursales['sucursal'][0]['sucursal'];
-        // console.log(this.nombre_sucursal);
 
         // si quieres ver que nombre de la zona es en la consola descomenta la linea de abajo
         // console.log(this.parametro_id_zona);

@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
 import { ApiService } from '../../servicios/dataApi/api.service';
 import { CoordinadorInterface } from '../../models/coordinador';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
@@ -22,12 +23,14 @@ export class HomeComponent implements OnInit {
   disabled: boolean;
   data: any;
   usuario_coordinador: CoordinadorInterface;
+  current_user: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    public http: HttpClient,
+    private http: HttpClient,
     public location: Location,
-    public router: Router
+    public router: Router,
+    private navbar: NavbarComponent
   ) {
     // extrae las propiedades de la interface de coordinador para usarla en el proceso de logado
     this.usuario_coordinador = {

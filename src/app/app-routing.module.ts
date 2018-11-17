@@ -21,6 +21,7 @@ const routes: Routes = [
       { path: 'zona/:id', component: ZonaComponent, canActivate: [AuthGuard] }
     ]
   },
+  { path: 'formulario_planes_de_trabajo', component: PlanesformComponent },
   { path: 'error/401', component: Error401Component },
   { path: '**', component: Error404Component }
 ];

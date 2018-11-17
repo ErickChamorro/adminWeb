@@ -78,7 +78,7 @@ export class NavbarComponent implements OnInit {
     // const token = localStorage.getItem('token');
     // const api_url = `${this.apiService.ip}/nombre_de_api/logout/${token}`;
     localStorage.removeItem('token');
-    localStorage.removeItem('CurrentUser');
+    localStorage.removeItem('current_user');
     this.router.navigate(['']);
     // SE REQUIERE DE ALGUNA API QUE GESTIONE EL LOGOUT PARA ELIMINAR EL TOKEN EN EL SERVIDOR
     // this.http.post<CoordinadorInterface>(api_url, {

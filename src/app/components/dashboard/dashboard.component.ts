@@ -12,7 +12,6 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 export class DashboardComponent implements OnInit {
   // variable para iterar en el HTML la lista de zonas
   zonas: any;
-  current_user: any;
   constructor(private navbar: NavbarComponent) {}
 
   ngOnInit() {
@@ -21,9 +20,10 @@ export class DashboardComponent implements OnInit {
   }
 
   mostrar_zonas() {
+    // tener la api de HomeCoordinador
     this.navbar.get_coordinador_y_zona().subscribe(data => {
+      // variable donde guarda el listado de zonas
       this.zonas = data['Zonas'];
-      this.current_user = data['region']['nombre'];
     });
   }
 }

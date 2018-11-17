@@ -39,13 +39,11 @@
                 el (data-keyboard="false") es para prevenir que el modal se cierre usando la tecla de ESC
               -->
             <!-- y el (data-backdrop="static") es para prevenir que el modal se cierre clickeando afuera de él. -->
-            <button mat-menu-item data-toggle="modal" data-target=".bd-example-modal-lg" data-keyboard="false"
-              data-backdrop="static">
+            <button mat-menu-item [routerLink]="['/formulario_planes_de_trabajo']">
               <mat-icon>add</mat-icon>
               <span>Crear plan de trabajo</span>
             </button>
-            <button mat-menu-item data-toggle="modal" data-target=".bd-example-modal-lg" data-keyboard="false"
-              data-backdrop="static">
+            <button mat-menu-item [routerLink]="['/formulario_planes_de_trabajo']">
               <mat-icon>visibility</mat-icon>
               <span>Ver planes de trabajo</span>
             </button>
@@ -62,10 +60,12 @@
     </tbody>
   </table>
 
-  <!-- modal -->
+  <!-- ************************************************    MODAL    ***************************************************** -->
+
+
   <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog modal-lg" role="document" style="height:500px; width: auto; padding: 50px;">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">
@@ -76,7 +76,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body" style="height: 300px;">
+        <div class="modal-body" style="height: 350px;">
           <!-- fragmento de la pagina de formulario de planes de trabajo -->
           <app-planesform></app-planesform>
         </div>
