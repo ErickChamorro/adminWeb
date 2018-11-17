@@ -6,12 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// componentes de material (boton, forms, menus e inputs)
+// componentes de material (boton, forms, menus, checkbox e inputs)
 import {
   MatButtonModule,
   MatFormFieldModule,
   MatMenuModule,
   MatInputModule,
+  MatCheckboxModule,
+  MatDatepickerModule,
+  MatSelectModule,
   MatIconModule
 } from '@angular/material';
 
@@ -53,6 +56,9 @@ import { PlanesformComponent } from './components/dashboard/zona/planesform/plan
     MatFormFieldModule,
     MatInputModule,
     MatMenuModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatSelectModule,
     MatIconModule,
 
     AppRoutingModule,
@@ -63,14 +69,17 @@ import { PlanesformComponent } from './components/dashboard/zona/planesform/plan
     RouterModule
   ],
   exports: [
-    // material buttons, forms, menus, iconos, inputs
+    // material buttons, forms, menus, iconos, checkbox, inputs
     MatButtonModule,
     MatFormFieldModule,
     MatMenuModule,
     MatIconModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatSelectModule,
     MatInputModule
   ],
-  providers: [NavbarComponent, UserService, ApiService],
+  providers: [NavbarComponent, UserService, ApiService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,18 +1,33 @@
 <!-- FORMULARIO DE GESTION DE PLANES DE TRABAJO QUE SE MOSTRARA COMO FRAGEMENTO EN UN MODAL QUE ESTA EN OTRO COMPONENTE -->
 <form action="">
-  <input type="text" name="da" id="da" placeholder="asdasdads" class="form-control">
-  <br>
-  <input type="text" placeholder="blablabla">
-  <br>
-  <input type="checkbox" name="uno" id="uno">
-  <label for="uno">apertura</label>
-  <br>
-  <input type="checkbox" name="dos" id="dos">
-  <label for="dos">inspeccion</label>
-  <br>
-  <input type="checkbox" name="tres" id="tres">
-  <label for="tres">revision</label>
-  <br><br>
-  <input type="submit" class="btn btn-success btn-block" value="enviar">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Actividad</th>
+        <th scope="col">Prioridad</th>
+        <th scope="col">inicio</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>
+          <mat-checkbox [formControl]="disableSelect">prueba</mat-checkbox>
+        </th>
+        <th>
+          <select name="prioridad" id="prioridad" class="custom-select" [disabled]="!disableSelect.value">
+            <option value="Normal" selected>Normal</option>
+            <option value="Normal">Normal</option>
+            <option value="Normal">Normal</option>
+          </select>
+        </th>
+        <th>
+          <input type="date" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelect.value">
+          <!-- <input mat-input [matDatepicker]="picker" placeholder="Escoja una fecha">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #picker></mat-datepicker> -->
+        </th>
+      </tr>
+    </tbody>
+  </table>
   <!-- probar si se puede poner el atributo data-dismiss="modal" aqui o en un alert ponerselo -->
 </form>
