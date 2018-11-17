@@ -12,10 +12,8 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
 export class DashboardComponent implements OnInit {
   // variable para iterar en el HTML la lista de zonas
   zonas: any;
-  constructor(
-    private apiService: ApiService,
-    private navbar: NavbarComponent
-  ) {}
+  current_user: any;
+  constructor(private navbar: NavbarComponent) {}
 
   ngOnInit() {
     // carga la funcion donde se suscribe a la api que tenga las zonas de la region que el coordinador esté a cargo
@@ -25,13 +23,7 @@ export class DashboardComponent implements OnInit {
   mostrar_zonas() {
     this.navbar.get_coordinador_y_zona().subscribe(data => {
       this.zonas = data['Zonas'];
-      console.log(data['Zonas']);
+      this.current_user = data['region']['nombre'];
     });
-    // this.apiService.get_coordinador_y_zona().subscribe(data => {
-    //   this.zonas = data['Zonas'];
-
-    // si quieres ver que zonas carga en la consola, descomenta la linea de abajo
-    // console.log(data['Zonas']);
-    // });
   }
 }

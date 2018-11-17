@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 // servicios
 import { ApiService } from '../../../servicios/dataApi/api.service';
+import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-zona',
@@ -12,11 +13,14 @@ import { ApiService } from '../../../servicios/dataApi/api.service';
 export class ZonaComponent implements OnInit {
   // data que extrae del api de sucursales
   sucursales: any;
-  nombre_sucursal: any;
 
   // variable que contiene el nombre de la zona que se mostrara en este componente
   parametro_id_zona = '';
-  constructor(private apiService: ApiService, private route: ActivatedRoute) {}
+  constructor(
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private navbar: NavbarComponent
+  ) {}
 
   ngOnInit() {
     // funcion que muestra el listado de droguerias de la zona
@@ -27,7 +31,7 @@ export class ZonaComponent implements OnInit {
     // funcion para gestionar parametros
     this.route.params.subscribe(data => {
       // tener api de sucursales
-      this.apiService.get_detalle_zona(data['id']).subscribe(sucursales => {
+      this.navbar.get_detalle_zona(data['id']).subscribe(sucursales => {
         // variable donde se guarda el array que muestre las droguerias
         this.sucursales = sucursales['sucursal'];
         // variable donde guarda el nombre de la zona

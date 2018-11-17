@@ -53,10 +53,21 @@ export class NavbarComponent implements OnInit {
     this.togglear_sidebar();
   }
 
+  // api HomeCoordinador
+  // conseguir el nombre del coordinador segun se haya logeado en el login
   get_coordinador_y_zona() {
     const api_url = `${
       this.apiService.ip
     }/supervisores_api/public/api/HomeCoordinador`;
+    return this.http.get(api_url, { headers: this.headers });
+  }
+
+  // api sucurzalesZona (usado por: ZonaComponent.ts)
+  // segun la zona que haya escogido el coordinador muestra la lista de droguerias que corresponde a la zona
+  get_detalle_zona(id_zona: number) {
+    const api_url = `${
+      this.apiService.ip
+    }/supervisores_api/public/api/sucursalesZona/${id_zona}`;
     return this.http.get(api_url, { headers: this.headers });
   }
 

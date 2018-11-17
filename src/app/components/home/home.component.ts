@@ -23,17 +23,11 @@ export class HomeComponent implements OnInit {
   data: any;
   usuario_coordinador: CoordinadorInterface;
 
-  datos_nombre_coordinador: any;
-  datos_apellido_coordinador: any;
-  datos_region_coordinador: any;
-  current_user: any;
-
   constructor(
     private formBuilder: FormBuilder,
     public http: HttpClient,
     public location: Location,
-    public router: Router,
-    private apiService: ApiService
+    public router: Router
   ) {
     // extrae las propiedades de la interface de coordinador para usarla en el proceso de logado
     this.usuario_coordinador = {
@@ -101,15 +95,9 @@ export class HomeComponent implements OnInit {
           const token = data['access_token'];
           // se debe asignar al local Storage el token para que se use después...
           localStorage.setItem('token', token);
-          // usar la siguiente api para que usuario acceda al dashboard segun sea su rol
-          // para eso se debe tener el token que está guardado en el Local Storage
-          // this.apiService.get_coordinador_y_zona().subscribe(datos => {
-          //   // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
-          //   // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
-          //   this.current_user = datos['region']['nombre'];
-          //   localStorage.setItem('CurrentUser', this.current_user);
+          // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
+          // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
           this.router.navigate(['/dashboard']);
-          // });
         },
         // *****************************    GESTION DE ERRORES   *****************************************
         error => {

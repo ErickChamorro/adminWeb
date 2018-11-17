@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   constructor(private apiService: ApiService, private router: Router) {}
 
   canActivate() {
-    if (this.apiService.get_current_user()) {
+    if (this.apiService.comprobar_token()) {
       // login TRUE
       return true;
     } else {
