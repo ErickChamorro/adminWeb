@@ -103,13 +103,13 @@ export class HomeComponent implements OnInit {
           localStorage.setItem('token', token);
           // usar la siguiente api para que usuario acceda al dashboard segun sea su rol
           // para eso se debe tener el token que está guardado en el Local Storage
-          this.apiService.get_coordinador_y_zona().subscribe(datos => {
-            // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
-            // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
-            this.router.navigate(['/dashboard']);
-            this.current_user = datos['region']['nombre'];
-            localStorage.setItem('CurrentUser', this.current_user);
-          });
+          // this.apiService.get_coordinador_y_zona().subscribe(datos => {
+          //   // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
+          //   // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
+          //   this.current_user = datos['region']['nombre'];
+          //   localStorage.setItem('CurrentUser', this.current_user);
+          this.router.navigate(['/dashboard']);
+          // });
         },
         // *****************************    GESTION DE ERRORES   *****************************************
         error => {

@@ -16,6 +16,13 @@ import { CoordinadorInterface } from '../../models/coordinador';
 })
 export class NavbarComponent implements OnInit {
   coordinador: CoordinadorInterface;
+
+  // ----------  CABECERA  ---------------
+  headers: HttpHeaders = new HttpHeaders({
+    Accept: 'application/json',
+    Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
+  });
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -35,9 +42,8 @@ export class NavbarComponent implements OnInit {
     // esto es para mostrar el usuario coordinador y las zonas que él esté a cargo
     // incluye una cabecera y se encuentra en servicio de API. presione F12 sobre la funcion "get_coordinador_y_zona"
     // para que te lleve directo a la funcion
-    this.apiService.get_coordinador_y_zona().subscribe(data => {
+    this.get_coordinador_y_zona().subscribe(data => {
       this.coordinador = data['region'];
-
       // si quieres ver la region y que coordinador está a cargo, descomenta la linea de abajo
       // console.log(this.coordinador);
     });
@@ -45,6 +51,13 @@ export class NavbarComponent implements OnInit {
     // funcion que tiene que inicializarse para que la sidebar pueda mostrarse ya que no se mostrará cuando este en modo telefono
     // y en vez de eso aparece un boton en la navbar
     this.togglear_sidebar();
+  }
+
+  get_coordinador_y_zona() {
+    const api_url = `${
+      this.apiService.ip
+    }/supervisores_api/public/api/HomeCoordinador`;
+    return this.http.get(api_url, { headers: this.headers });
   }
 
   // este metodo esta funcionando en los botones de cerrar sesion

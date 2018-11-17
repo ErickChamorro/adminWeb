@@ -11,11 +11,12 @@ export class ApiService {
 
   ip = 'http://192.168.1.4'; // servidor SENTOS
   // ip = '192.168.1.64';    // servidor cudris
+  token = localStorage.getItem('token');
 
   // ----------  CABECERA  ---------------
   headers: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
-    Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
+    Authorization: 'Bearer' + ' ' + this.token
   });
 
   // api Login
@@ -39,7 +40,7 @@ export class ApiService {
 
   // esto se utilizara en el GUARD para validar si el usuario tiene permitido el acceso a la ruta
   get_current_user() {
-    const user_string = localStorage.getItem('CurrentUser');
+    const user_string = localStorage.getItem('token');
     if (!isNullOrUndefined(user_string)) {
       const user = user_string;
       return user;
