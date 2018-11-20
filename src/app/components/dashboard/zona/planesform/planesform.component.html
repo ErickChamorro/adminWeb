@@ -1,4 +1,6 @@
-<!-- FORMULARIO DE GESTION DE PLANES DE TRABAJO QUE SE MOSTRARA COMO FRAGEMENTO EN UN MODAL QUE ESTA EN OTRO COMPONENTE -->
+<!--
+  FORMULARIO DE GESTION DE PLANES DE TRABAJO QUE SE MOSTRARA COMO FRAGEMENTO EN UN MODAL QUE ESTA EN OTRO COMPONENTE
+-->
 
 <div class="body">
   <div class="contenedor-tabla">
@@ -15,67 +17,90 @@
         <tbody>
           <tr>
             <th>
-              <mat-checkbox [formControl]="disableSelectUno">Apertura</mat-checkbox>
+              <mat-checkbox [formControl]="disableSelectUno"
+                >Apertura</mat-checkbox
+              >
             </th>
             <th>
-              <select name="prioridad" id="prioridad" class="custom-select" [disabled]="!disableSelectUno.value">
+              <select
+                name="prioridad"
+                id="prioridad"
+                class="custom-select"
+                [disabled]="!disableSelectUno.value"
+              >
                 <option value="Normal" selected>Normal</option>
                 <option value="Baja">Baja</option>
                 <option value="Alta">Alta</option>
               </select>
             </th>
             <th>
-              <input type="date" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectUno.value">
+              <input
+                type="date"
+                placeholder="dd/mm/aa"
+                class="form-control"
+                [disabled]="!disableSelectUno.value"
+              />
             </th>
             <th>
-              <input type="date" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectUno.value">
+              <input
+                type="date"
+                placeholder="dd/mm/aa"
+                class="form-control"
+                [disabled]="!disableSelectUno.value"
+              />
             </th>
           </tr>
-          <tr>
-            <th>
-              <mat-checkbox [formControl]="disableSelectDos">Evaluación</mat-checkbox>
-            </th>
-            <th>
-              <select name="prioridad" id="prioridad" class="custom-select" [disabled]="!disableSelectDos.value">
-                <option value="Normal" selected>Normal</option>
-                <option value="Baja">Baja</option>
-                <option value="Alta">Alta</option>
-              </select>
-            </th>
-            <th>
-              <input type="date" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectDos.value">
-            </th>
-            <th>
-              <input type="date" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectDos.value">
-            </th>
-          </tr>
-          <tr>
-            <th>
-              <mat-checkbox [formControl]="disableSelectTres">Inspección</mat-checkbox>
-            </th>
-            <th>
-              <select name="prioridad" id="prioridad" class="custom-select" [disabled]="!disableSelectTres.value">
-                <option value="Normal" selected>Normal</option>
-                <option value="Baja">Baja</option>
-                <option value="Alta">Alta</option>
-              </select>
-            </th>
-            <th>
-              <input type="date" id="inicio" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectTres.value">
-            </th>
-            <th>
-              <input type="date" id="fin" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectTres.value">
-            </th>
-          </tr>
+          <!--
+            <tr>
+              <th>
+                <mat-checkbox [formControl]="disableSelectDos">Evaluación</mat-checkbox>
+              </th>
+              <th>
+                <select name="prioridad" id="prioridad" class="custom-select" [disabled]="!disableSelectDos.value">
+                  <option value="Normal" selected>Normal</option>
+                  <option value="Baja">Baja</option>
+                  <option value="Alta">Alta</option>
+                </select>
+              </th>
+              <th>
+                <input type="date" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectDos.value">
+              </th>
+              <th>
+                <input type="date" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectDos.value">
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <mat-checkbox [formControl]="disableSelectTres">Inspección</mat-checkbox>
+              </th>
+              <th>
+                <select name="prioridad" id="prioridad" class="custom-select" [disabled]="!disableSelectTres.value">
+                  <option value="Normal" selected>Normal</option>
+                  <option value="Baja">Baja</option>
+                  <option value="Alta">Alta</option>
+                </select>
+              </th>
+              <th>
+                <input type="date" id="inicio" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectTres.value">
+              </th>
+              <th>
+                <input type="date" id="fin" placeholder="dd/mm/aa" class="form-control" [disabled]="!disableSelectTres.value">
+              </th>
+            </tr>
+          -->
         </tbody>
       </table>
-      <!-- probar si se puede poner el atributo data-dismiss="modal" aqui o en un alert ponerselo -->
-      <button id="btnEnviar" class="btn btn-success btn-block" data-dismiss="modal" (click)="enviar_plan()"><i class="fas fa-plus"></i>
-        Asignar
-        plan
-        de trabajo</button>
+      <!--
+        probar si se puede poner el atributo data-dismiss="modal" aqui o en un alert ponerselo
+      -->
+      <button
+        id="btnEnviar"
+        class="btn btn-success btn-block"
+        data-dismiss="modal"
+        (click)="enviar_plan()"
+      >
+        <i class="fas fa-plus"></i> Asignar plan de trabajo
+      </button>
     </form>
-
   </div>
-
 </div>

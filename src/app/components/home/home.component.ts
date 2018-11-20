@@ -4,9 +4,10 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
-import { ApiService } from '../../servicios/dataApi/api.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CoordinadorInterface } from '../../models/coordinador';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { ApiService } from '../../servicios/dataApi/api.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  ip = 'http://192.168.1.4'; // servidor SENTOS
+  // ip = 'http://192.168.1.4'; // servidor SENTOS
   // ip = 'http://192.168.1.64';    // servidor cudris
   loginForm: FormGroup;
   submitted = false;
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit {
     private http: HttpClient,
     public location: Location,
     public router: Router,
-    private navbar: NavbarComponent
+    private apiService: ApiService,
+    private spinner: NgxSpinnerService
   ) {
     // extrae las propiedades de la interface de coordinador para usarla en el proceso de logado
     this.usuario_coordinador = {
@@ -57,6 +59,14 @@ export class HomeComponent implements OnInit {
     // para desactivar el boton al cargar la pagina
     // despues se pondrá en true hasta que los datos que se haya llenado en el formulario sean validos
     this.disabled = true;
+
+    // AL INICIAR LA PAGINA SE CARGA ESTE SPINNER PRIMERO, DESPUES SE CARGA EL LOGIN
+    this.spinner.show();
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
   }
 
   // accede a los controles de loginform
@@ -79,10 +89,16 @@ export class HomeComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1200);
+
     // hacer el post al api para comprobar que usuario existe para recibir el TOKEN
     this.http
       .post(
-        `${this.ip}/supervisores_api/public/api/login`,
+        `${this.apiService.ip}/supervisores_api/public/api/login`,
         // parametros extraidos del HTML
         JSON.stringify(this.loginForm.value),
         {
@@ -113,13 +129,10 @@ export class HomeComponent implements OnInit {
             });
             localStorage.clear();
             console.log('un error 500: (error interno del servidor)');
-          } // PARA ERROR 404: PAGE NOT FOUND (PAGINA NO ENCONTRADA)
-          if (error.status === 404) {
+          } else if (error.status === 404) {
             // para éste no mostrará error en ninguna parte, solo redirigirá a una pagina diseñada para ésto
             this.router.navigate(['/error/404']);
-          }
-          // ERROR 401: UNAUTHORIZED (NO AUTORIZADO)
-          if (error.status === 401) {
+          } else if (error.status === 401) {
             swal({
               title: 'Error',
               text: 'Usuario y/o contraseña incorrectos.',

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { isNullOrUndefined } from 'util';
-import { CoordinadorInterface } from '../../models/coordinador';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,8 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   ip = 'http://192.168.1.4'; // servidor SENTOS
-  // ip = '192.168.1.64';    // servidor cudris
+  // ip = 'http://192.168.1.64';    // servidor cudris
+  // ip = 'http://192.168.1.185';
 
   // ----------  CABECERA  ---------------
   headers: HttpHeaders = new HttpHeaders({

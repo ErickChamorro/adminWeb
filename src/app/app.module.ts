@@ -6,6 +6,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// spinner
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 // componentes de material (boton, forms, menus, checkbox e inputs)
 import {
   MatButtonModule,
@@ -66,6 +69,7 @@ import { PlanesformComponent } from './components/dashboard/zona/planesform/plan
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     RouterModule
   ],
   exports: [
