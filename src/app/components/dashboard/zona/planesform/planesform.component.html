@@ -12,7 +12,7 @@
 
 <div class="" style="padding-right: 50px;">
   <div class="contenedor-tabla align-content-around">
-    <form action="">
+    <form>
       <table class="table table-striped tabla">
         <thead class="thead-dark">
           <tr>
@@ -25,20 +25,27 @@
         <tbody>
           <tr>
             <th>
-              <mat-checkbox [formControl]="disableSelectUno"
+              <mat-checkbox
+                id="chk_apertura"
+                name="chk_apertura"
+                [formControl]="disableSelectUno"
                 >Apertura</mat-checkbox
               >
             </th>
-            <th id="columna-fecha">
+            <th>
               <select
                 name="prioridad"
                 id="prioridad"
                 class="custom-select"
                 [disabled]="!disableSelectUno.value"
               >
-                <option value="Normal" selected>Normal</option>
-                <option value="Baja">Baja</option>
-                <option value="Alta">Alta</option>
+                <option value="seleccione" selected>--seleccione--</option>
+                <option
+                  value="{{prioridad.nombre}}"
+                  *ngFor="let prioridad of prioridades"
+                  title="{{prioridad.descripcion}}"
+                  >{{ prioridad.nombre }}</option
+                >
               </select>
             </th>
             <th id="columna-fecha">
@@ -49,7 +56,7 @@
                 [disabled]="!disableSelectUno.value"
               />
             </th>
-            <th>
+            <th id="columna-fecha">
               <input
                 type="date"
                 placeholder="dd/mm/aa"

@@ -17,6 +17,7 @@ export class PlanesformComponent implements OnInit {
 
   nombre_sucursal: any;
   sucursales: any;
+  prioridades: any;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class PlanesformComponent implements OnInit {
 
   ngOnInit() {
     this.get_sucursal();
+    this.mostrar_prioridad();
   }
 
   enviar_plan() {
@@ -50,6 +52,13 @@ export class PlanesformComponent implements OnInit {
       // si quieres ver que nombre de la zona es en la consola descomenta la linea de abajo
       console.log(this.nombre_sucursal);
       // });
+    });
+  }
+
+  mostrar_prioridad() {
+    this.apiService.mostrar_prioridad().subscribe(data => {
+      this.prioridades = data['prioridades'];
+      console.log(this.prioridades);
     });
   }
 }

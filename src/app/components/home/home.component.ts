@@ -15,8 +15,6 @@ import { ApiService } from '../../servicios/dataApi/api.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // ip = 'http://192.168.1.4'; // servidor SENTOS
-  // ip = 'http://192.168.1.64';    // servidor cudris
   loginForm: FormGroup;
   submitted = false;
   respuesta: any;

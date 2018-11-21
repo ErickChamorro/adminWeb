@@ -45,4 +45,18 @@ export class ApiService {
       return null;
     }
   }
+
+  // blabla
+  asignar_plan_de_trabajo() {
+    const api_url = `${
+      this.ip
+    }/supervisores_api/public/api/CrearActividadApertura`;
+    return this.http.post(api_url, { headers: this.headers });
+  }
+
+  // mostrar prioridad
+  mostrar_prioridad() {
+    const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
+    return this.http.get(api_url, { headers: this.headers });
+  }
 }
