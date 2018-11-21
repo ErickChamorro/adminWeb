@@ -92,11 +92,9 @@ export class HomeComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 1200);
 
-    // hacer el post al api para comprobar que usuario existe para recibir el TOKEN
-    this.http
+      // hacer el post al api para comprobar que usuario existe para recibir el TOKEN
+      this.http
       .post(
         `${this.apiService.ip}/supervisores_api/public/api/login`,
         // parametros extraidos del HTML
@@ -107,51 +105,52 @@ export class HomeComponent implements OnInit {
             'Content-Type': 'application/json'
           })
         }
-      )
-      .subscribe(
-        data => {
-          // variable que guarda el dato del token que recibió de la respuesta del servidor
-          const token = data['access_token'];
-          // se debe asignar al local Storage el token para que se use después...
-          localStorage.setItem('token', token);
-          // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
-          // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
-          this.router.navigate(['/dashboard']);
-        },
-        // *****************************    GESTION DE ERRORES   *****************************************
-        error => {
-          // PARA ERROR CON STATUS 500: INTERNAL SERVER ERROR (error interno del servidor)
-          if (error.status === 500) {
-            swal({
-              title: 'Error',
-              text: 'Error interno del servidor. (internal server) Error: ',
-              type: 'error'
-            });
-            localStorage.clear();
-            console.log('un error 500: (error interno del servidor)');
-          } else if (error.status === 404) {
-            // para éste no mostrará error en ninguna parte, solo redirigirá a una pagina diseñada para ésto
-            this.router.navigate(['/error/404']);
-          } else if (error.status === 401) {
-            swal({
-              title: 'Error',
-              text: 'Usuario y/o contraseña incorrectos.',
-              type: 'error'
-            });
-            console.log('un error 401 (no autorizado)');
-          } else {
-            swal({
-              title: 'Error',
-              text: 'Algo raro pasa... ',
-              type: 'error'
-            });
-            // console.log(JSON.stringify(error));
+        )
+        .subscribe(
+          data => {
+            // variable que guarda el dato del token que recibió de la respuesta del servidor
+            const token = data['access_token'];
+            // se debe asignar al local Storage el token para que se use después...
+            localStorage.setItem('token', token);
+            // AQUI SE TIENE QUE VALIDAR SI EL USUARIO ES COORDINADOR, ADMINISTRADOR O SUPERVISOR
+            // HASTA AHORA NADA MAS SE INGRESA SIN VALIDAR, PERO SI NO ES COORDINADOR MANDA UNA ALERTA DE ERROR
+            this.router.navigate(['/dashboard']);
+          },
+          // *****************************    GESTION DE ERRORES   *****************************************
+          error => {
+            // PARA ERROR CON STATUS 500: INTERNAL SERVER ERROR (error interno del servidor)
+            if (error.status === 500) {
+              swal({
+                title: 'Error',
+                text: 'Error interno del servidor. (internal server) Error: ',
+                type: 'error'
+              });
+              localStorage.clear();
+              console.log('un error 500: (error interno del servidor)');
+            } else if (error.status === 404) {
+              // para éste no mostrará error en ninguna parte, solo redirigirá a una pagina diseñada para ésto
+              this.router.navigate(['/error/404']);
+            } else if (error.status === 401) {
+              swal({
+                title: 'Error',
+                text: 'Usuario y/o contraseña incorrectos.',
+                type: 'error'
+              });
+              console.log('un error 401 (no autorizado)');
+            } else {
+              swal({
+                title: 'Error',
+                text: 'Algo raro pasa... ',
+                type: 'error'
+              });
+              // console.log(JSON.stringify(error));
+            }
           }
+          );
+          this.spinner.hide();
+        }, 1200);
         }
-      );
-  }
-
-  // metodo que se cumple al presionar el boton de "olvide mi contraseña"
+        // metodo que se cumple al presionar el boton de "olvide mi contraseña"
   olvide_mi_contrasenia() {
     swal({
       title: 'Reestablecer contraseña',
