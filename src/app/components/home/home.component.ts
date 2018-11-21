@@ -95,16 +95,16 @@ export class HomeComponent implements OnInit {
 
       // hacer el post al api para comprobar que usuario existe para recibir el TOKEN
       this.http
-      .post(
-        `${this.apiService.ip}/supervisores_api/public/api/login`,
-        // parametros extraidos del HTML
-        JSON.stringify(this.loginForm.value),
-        {
-          headers: new HttpHeaders({
-            Authorization: 'Access',
-            'Content-Type': 'application/json'
-          })
-        }
+        .post(
+          `${this.apiService.ip}/supervisores_api/public/api/login`,
+          // parametros extraidos del HTML
+          JSON.stringify(this.loginForm.value),
+          {
+            headers: new HttpHeaders({
+              Authorization: 'Access',
+              'Content-Type': 'application/json'
+            })
+          }
         )
         .subscribe(
           data => {
@@ -146,11 +146,11 @@ export class HomeComponent implements OnInit {
               // console.log(JSON.stringify(error));
             }
           }
-          );
-          this.spinner.hide();
-        }, 1200);
-        }
-        // metodo que se cumple al presionar el boton de "olvide mi contraseña"
+        );
+      this.spinner.hide();
+    }, 1500);
+  }
+  // metodo que se cumple al presionar el boton de "olvide mi contraseña"
   olvide_mi_contrasenia() {
     swal({
       title: 'Reestablecer contraseña',

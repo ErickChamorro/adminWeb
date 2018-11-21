@@ -1,12 +1,45 @@
-.contenedor-tabla {
-  border: 3px dashed dodgerblue;
-  padding: 80px;
-  width: 60%;
-  position: fixed;
-  top: 10%;
-  left: 20%;
+@import '../../../../shared/navbar/navbar.component.css';
+
+/* input[type='date'] {
+  width: 160px;
+} */
+
+@media screen and (max-width: 950px) {
+  #columna-fecha {
+    width: 180px;
+  }
+
+  input[type='date'] {
+    width: 160px;
+  }
 }
 
-.thead-dark {
-  border-radius: 10px;
+@media screen and (max-width: 875px) {
+  #columna-fecha {
+    width: 60px;
+  }
+
+  input[type='date'] {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #columna-fecha {
+    width: 180px;
+  }
+
+  input[type='date'] {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  #columna-fecha {
+    width: 180px;
+  }
+
+  input[type='date'] {
+    width: 160px;
+  }
 }

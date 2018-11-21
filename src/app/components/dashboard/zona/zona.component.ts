@@ -34,7 +34,7 @@ export class ZonaComponent implements OnInit {
         this.parametro_id_zona = sucursales['zona']['descripcion_zona'];
 
         // si quieres ver que nombre de la zona es en la consola descomenta la linea de abajo
-        // console.log(this.parametro_id_zona);
+        // console.log(this.sucursales);
       });
     });
   }

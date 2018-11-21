@@ -1,9 +1,17 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h2>
+      Gestor de planes de trabajo para: <i>{{ nombre_sucursal }}</i>
+    </h2>
+  </div>
+</div>
+<br />
 <!--
   FORMULARIO DE GESTION DE PLANES DE TRABAJO QUE SE MOSTRARA COMO FRAGEMENTO EN UN MODAL QUE ESTA EN OTRO COMPONENTE
 -->
 
-<div class="body">
-  <div class="contenedor-tabla">
+<div class="" style="padding-right: 50px;">
+  <div class="contenedor-tabla align-content-around">
     <form action="">
       <table class="table table-striped tabla">
         <thead class="thead-dark">
@@ -21,7 +29,7 @@
                 >Apertura</mat-checkbox
               >
             </th>
-            <th>
+            <th id="columna-fecha">
               <select
                 name="prioridad"
                 id="prioridad"
@@ -33,7 +41,7 @@
                 <option value="Alta">Alta</option>
               </select>
             </th>
-            <th>
+            <th id="columna-fecha">
               <input
                 type="date"
                 placeholder="dd/mm/aa"

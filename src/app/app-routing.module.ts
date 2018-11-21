@@ -18,16 +18,20 @@ const routes: Routes = [
     component: NavbarComponent,
     children: [
       { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-      { path: 'zona/:id', component: ZonaComponent, canActivate: [AuthGuard] },
       {
-        path: 'formulario_planes_de_trabajo',
+        path: 'zona/:id',
+        component: ZonaComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'zona/:id/formulario/:id',
         component: PlanesformComponent,
         canActivate: [AuthGuard]
       }
     ]
   },
-  { path: 'error/401', component: Error401Component },
-  { path: '**', component: Error404Component }
+  { path: 'error/401', component: Error401Component }
+  // { path: '**', component: Error404Component }
 ];
 
 @NgModule({
