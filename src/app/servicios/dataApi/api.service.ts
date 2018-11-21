@@ -12,10 +12,16 @@ export class ApiService {
   // ip = 'http://192.168.1.64';    // servidor cudris
   ip = 'http://192.168.1.185';
 
-  // ----------  CABECERA  ---------------
-  headers: HttpHeaders = new HttpHeaders({
+  // ----------  CABECERA GET  ---------------
+  headers_get: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
     Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
+  });
+
+  // ----------  CABECERA POST   -----------------
+  headers_post: HttpHeaders = new HttpHeaders({
+    Authorization: 'Access',
+    'Content-Type': 'application/json'
   });
 
   // api Login
@@ -23,7 +29,7 @@ export class ApiService {
 
   get_coordinador_y_zona() {
     const api_url = `${this.ip}/supervisores_api/public/api/HomeCoordinador`;
-    return this.http.get(api_url, { headers: this.headers });
+    return this.http.get(api_url, { headers: this.headers_get });
   }
 
   // api sucurzalesZona
@@ -32,7 +38,7 @@ export class ApiService {
     const api_url = `${
       this.ip
     }/supervisores_api/public/api/sucursalesZona/${id_zona}`;
-    return this.http.get(api_url, { headers: this.headers });
+    return this.http.get(api_url, { headers: this.headers_get });
   }
 
   // esto se utilizara en el GUARD para validar si el usuario tiene permitido el acceso a la ruta
@@ -46,17 +52,9 @@ export class ApiService {
     }
   }
 
-  // blabla
-  asignar_plan_de_trabajo() {
-    const api_url = `${
-      this.ip
-    }/supervisores_api/public/api/CrearActividadApertura`;
-    return this.http.post(api_url, { headers: this.headers });
-  }
-
   // mostrar prioridad
   mostrar_prioridad() {
     const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
-    return this.http.get(api_url, { headers: this.headers });
+    return this.http.get(api_url, { headers: this.headers_get });
   }
 }

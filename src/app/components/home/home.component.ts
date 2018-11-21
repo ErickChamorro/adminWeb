@@ -97,12 +97,7 @@ export class HomeComponent implements OnInit {
           `${this.apiService.ip}/supervisores_api/public/api/login`,
           // parametros extraidos del HTML
           JSON.stringify(this.loginForm.value),
-          {
-            headers: new HttpHeaders({
-              Authorization: 'Access',
-              'Content-Type': 'application/json'
-            })
-          }
+          { headers: this.apiService.headers_post }
         )
         .subscribe(
           data => {

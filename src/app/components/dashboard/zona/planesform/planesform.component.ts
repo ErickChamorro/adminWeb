@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import swal from 'sweetalert2';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../../../servicios/dataApi/api.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-planesform',
@@ -22,7 +23,8 @@ export class PlanesformComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private navbar: NavbarComponent,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -60,5 +62,24 @@ export class PlanesformComponent implements OnInit {
       this.prioridades = data['prioridades'];
       console.log(this.prioridades);
     });
+  }
+
+  asignar_plan_de_trabajo() {
+    this.http
+      .post(
+        `${
+          this.apiService.ip
+        }/supervisores_api/public/api/CrearActividadApertura`,
+        JSON.stringify(this.prioridades),
+        { headers: this.apiService.headers_post }
+      )
+      .subscribe(
+        respuesta => {
+          console.log(respuesta);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 }
