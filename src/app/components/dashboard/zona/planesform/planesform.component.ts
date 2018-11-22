@@ -25,6 +25,13 @@ export class PlanesformComponent implements OnInit {
   otroform: FormGroup;
   submitted = false;
   respuesta: any;
+  array_fechas_apertura = [
+    {
+      fecha_inicio: '23-11-2018',
+      fecha_fin: '24-11-2018'
+    }
+  ];
+  objeto = {};
   public respuesta_servidor: boolean;
   nombre_sucursal: any;
   prioridades: any;
@@ -40,7 +47,7 @@ export class PlanesformComponent implements OnInit {
 
     this.planesform = this.formBuilder.group({
       id_plan_trabajo: new FormControl({ value: 1, disabled: false }),
-      id_prioridad: new FormControl({ value: '' }),
+      id_prioridad: new FormControl({ value: null }),
       fecha_inicio: new FormControl({ value: '', disabled: false }),
       fecha_fin: new FormControl({ value: '', disabled: false })
     });
@@ -52,22 +59,6 @@ export class PlanesformComponent implements OnInit {
   }
 
   comprobar() {
-    // console.log(
-    //   `{"array_fechas_apertura":[]}`
-    // );
-    // console.log(
-    //   'id_plan: ' +
-    //     this.number_id_plan_trabajo.value +
-    //     '\n' +
-    //     'id_prioridad: ' +
-    //     this.number_id_prioridad.value +
-    //     '\n' +
-    //     'fecha_inicio: ' +
-    //     this.fecha_inicio.value +
-    //     '\n' +
-    //     'fecha_fin: ' +
-    //     this.fecha_fin.value
-    // );
     this.otroform = this.formBuilder.group({
       fecha_inicio: new FormControl({
         value: this.fecha_inicio.value,
@@ -78,7 +69,15 @@ export class PlanesformComponent implements OnInit {
         disabled: false
       })
     });
-    console.log(this.otroform.value);
+    this.objeto = {
+      array_fechas_apertura: [
+        this.otroform.value
+      ]
+    };
+    console.log('solo fechas: ' + JSON.stringify(this.otroform.value));
+    console.log(typeof (this.otroform.value));
+    console.log('array de fechas apertura: ' + JSON.stringify(this.objeto));
+    console.log('dentro del objeto: ' + JSON.stringify(this.objeto['array_fechas_apertura']));
   }
 
   createItem(): FormGroup {
@@ -142,11 +141,16 @@ export class PlanesformComponent implements OnInit {
       })
     });
 
+    this.objeto = {
+      array_fechas_apertura: [
+        this.otroform.value
+      ]
+    };
+
     this.http
       .post(
         `${this.apiService.ip}/supervisores_api/public/api/CrearActividadApertura?id_prioridad=${this.number_id_prioridad.value
-        }&id_plan_trabajo=${this.number_id_plan_trabajo.value}`,
-        this.otroform.value,
+        }&id_plan_trabajo=${this.number_id_plan_trabajo.value}`, this.objeto,
         { headers: this.apiService.headers_get }
       )
       .subscribe(
