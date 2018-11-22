@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
     const api_url = `${
       this.apiService.ip
     }/supervisores_api/public/api/HomeCoordinador`;
-    return this.http.get(api_url, { headers: this.headers });
+    return this.http.get(api_url, { headers: this.apiService.headers_get });
   }
 
   // api sucurzalesZona (usado por: ZonaComponent.ts)
@@ -68,7 +68,15 @@ export class NavbarComponent implements OnInit {
     const api_url = `${
       this.apiService.ip
     }/supervisores_api/public/api/sucursalesZona/${id_zona}`;
-    return this.http.get(api_url, { headers: this.headers });
+    return this.http.get(api_url, { headers: this.apiService.headers_get });
+  }
+
+  // mostrar prioridad
+  mostrar_prioridad() {
+    const api_url = `${
+      this.apiService.ip
+    }/supervisores_api/public/api/MostrarPrioridad`;
+    return this.http.get(api_url, { headers: this.apiService.headers_get });
   }
 
   // este metodo esta funcionando en los botones de cerrar sesion

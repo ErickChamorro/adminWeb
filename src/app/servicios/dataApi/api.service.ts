@@ -24,6 +24,12 @@ export class ApiService {
     'Content-Type': 'application/json'
   });
 
+  // ----------  CABECERA PLANES POST ------------
+  headers_planes: HttpHeaders = new HttpHeaders({
+    Accept: 'application/json',
+    'Content-Type': 'application/json'
+  });
+
   // api Login
   // esa está en el Homecomponent.ts
 
@@ -52,9 +58,9 @@ export class ApiService {
     }
   }
 
-  // mostrar prioridad
-  mostrar_prioridad() {
-    const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
-    return this.http.get(api_url, { headers: this.headers_get });
-  }
+  // // mostrar prioridad
+  // mostrar_prioridad() {
+  //   const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
+  //   return this.http.get(api_url, { headers: this.headers_get });
+  // }
 }
