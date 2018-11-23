@@ -5,7 +5,6 @@ import { ApiService } from '../../servicios/dataApi/api.service';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
-import ScrollReveal from 'scrollreveal';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,13 +14,11 @@ import ScrollReveal from 'scrollreveal';
 export class DashboardComponent implements OnInit {
   // variable para iterar en el HTML la lista de zonas
   zonas: any;
-  constructor(private navbar: NavbarComponent, private router: Router) {}
+  constructor(private navbar: NavbarComponent, private router: Router) { }
 
   ngOnInit() {
     // carga la funcion donde se suscribe a la api que tenga las zonas de la region que el coordinador esté a cargo
     this.mostrar_zonas();
-    // si se quiere probar con scroll reveal
-    // this.animar_tarjetas();
   }
 
   mostrar_zonas() {
@@ -46,16 +43,4 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
-  // si se quiere probar con scroll reveall
-  // animar_tarjetas() {
-  //   const opciones = {
-  //     origin: 'bottom',
-  //     delay: '100',
-  //     distance: '60px',
-  //     easing: 'ease-in-out',
-  //     reset: 'true'
-  //   };
-  //   ScrollReveal().reveal('.tarjetas', opciones);
-  // }
 }

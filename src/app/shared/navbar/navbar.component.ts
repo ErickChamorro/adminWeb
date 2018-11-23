@@ -18,6 +18,8 @@ export class NavbarComponent implements OnInit {
   coordinador: CoordinadorInterface;
 
   // ----------  CABECERA  ---------------
+  // se usa esta cabecera y no la de apiservice porque si se usa la de apiservice se genera error en cuestion de peticiones
+  // ya que son simultaneas con otras peticiones
   headers: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
     Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
@@ -58,8 +60,8 @@ export class NavbarComponent implements OnInit {
   get_coordinador_y_zona() {
     const api_url = `${
       this.apiService.ip
-    }/supervisores_api/public/api/HomeCoordinador`;
-    return this.http.get(api_url, { headers: this.apiService.headers_get });
+      }/supervisores_api/public/api/HomeCoordinador`;
+    return this.http.get(api_url, { headers: this.headers });
   }
 
   // api sucurzalesZona (usado por: ZonaComponent.ts)
@@ -67,41 +69,28 @@ export class NavbarComponent implements OnInit {
   get_detalle_zona(id_zona: number) {
     const api_url = `${
       this.apiService.ip
-    }/supervisores_api/public/api/sucursalesZona/${id_zona}`;
-    return this.http.get(api_url, { headers: this.apiService.headers_get });
+      }/supervisores_api/public/api/sucursalesZona/${id_zona}`;
+    return this.http.get(api_url, { headers: this.headers });
   }
 
   // mostrar prioridad
   mostrar_prioridad() {
     const api_url = `${
       this.apiService.ip
-    }/supervisores_api/public/api/MostrarPrioridad`;
-    return this.http.get(api_url, { headers: this.apiService.headers_get });
+      }/supervisores_api/public/api/MostrarPrioridad`;
+    return this.http.get(api_url, { headers: this.headers });
   }
 
   // este metodo esta funcionando en los botones de cerrar sesion
   // **************************************      LOGOUT       *******************************************
   cerrarSesion() {
     // es opcional que se haga un alert confirmando si se quiere cerrar sesion
-    // const token = localStorage.getItem('token');
-    // const api_url = `${this.apiService.ip}/nombre_de_api/logout/${token}`;
     localStorage.removeItem('token');
-    localStorage.removeItem('current_user');
     this.router.navigate(['']);
-    // SE REQUIERE DE ALGUNA API QUE GESTIONE EL LOGOUT PARA ELIMINAR EL TOKEN EN EL SERVIDOR
-    // this.http.post<CoordinadorInterface>(api_url, {
-    //   headers: new HttpHeaders({
-    //     Authorization: 'Access',
-    //     'Content-Type': 'application/json'
-    //   })
-    // })
-    // .subscribe(respuesta => {
-    //   console.log(respuesta);
-    // });
   }
 
   togglear_sidebar() {
-    $('#sidebarCollapse').on('click', function() {
+    $('#sidebarCollapse').on('click', function () {
       $('#sidebar, #content').toggleClass('active');
       $('.collapse.in').toggleClass('in');
       $('a[aria-expanded=true]').attr('aria-expanded', 'false');
