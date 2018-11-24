@@ -41,7 +41,7 @@ export class PlanesformComponent implements OnInit {
     this.apertura_form = this.formBuilder.group({
       id_plan_trabajo: [1],
       id_prioridad: [],
-      array_fechas_apertura: this.formBuilder.array([this.agregar_grupo_fechas()])
+      array_fechas_apertura: this.formBuilder.array([this.grupo_fechas()])
     });
   }
 
@@ -50,44 +50,28 @@ export class PlanesformComponent implements OnInit {
     this.get_sucursal();
     // metodo para mostrar las prioridades en un select
     this.mostrar_prioridad();
+    // funcion para los botones de AGREGAR Y ELIMINAR
     $('#btnAgregar').popover({ trigger: 'hover' });
-    $('#btnVer').popover({ trigger: 'hover' });
+    $('#btnEliminar').popover({ trigger: 'hover' });
   }
 
-  agregar_grupo_fechas() {
+  grupo_fechas() {
     return this.formBuilder.group({
       fecha_inicio: [],
       fecha_fin: []
     });
   }
 
-  // pon esto en el NGSUBMIT del html para que con este metodo muestre en un console.log como se enviará los datos
-  // en la base de datos de la API
-  simular_envio() {
-    this.fechas_form = this.formBuilder.group({
-      fecha_inicio: [this.fecha_inicio.value],
-      fecha_fin: [this.fecha_fin.value]
-    });
-    this.objeto = {
-      array_fechas_apertura: [
-        this.fechas_form.value
-      ]
-    };
-    console.log('solo fechas: ' + JSON.stringify(this.fechas_form.value));
-    console.log(typeof (this.fechas_form.value));
-    console.log(JSON.stringify(this.objeto));
-    console.log('dentro del objeto: ' + JSON.stringify(this.objeto['array_fechas_apertura']));
-  }
-
+  // metodo para usarlo en el titulo para que muestre el nombre de la sucursal
   get_sucursal() {
     // funcion para gestionar parametros
     this.route.params.subscribe(data => {
-      console.log(data);
       this.nombre_sucursal = data['id'];
-
+      // console.log(data);
     });
   }
 
+  // metodo para consumir API de prioridades y mostrarmelas en un SELECT
   mostrar_prioridad() {
     this.navbar.mostrar_prioridad().subscribe(data => {
       this.prioridades = data['prioridades'];
@@ -105,6 +89,11 @@ export class PlanesformComponent implements OnInit {
     return this.apertura_form.get('id_prioridad');
   }
 
+  get array_fechas() {
+    // retorna el array que agarra de apertura_form
+    return <FormArray>this.apertura_form.get('array_fechas_apertura');
+  }
+
   get fecha_inicio() {
     return this.apertura_form.get('fecha_inicio');
   }
@@ -113,50 +102,66 @@ export class PlanesformComponent implements OnInit {
     return this.apertura_form.get('fecha_fin');
   }
 
+  // ********** METODO PARA AGREGAR MAS FECHAS ****************
+  agregar_fechas() {
+    this.array_fechas.push(this.grupo_fechas());
+  }
+
+  // ********** METODO PARA ELIMINAR FECHAS *******************
+  eliminar_fechas(index) {
+    this.array_fechas.removeAt(index);
+  }
+
+  // metodo para simular un envio: muestra en la consola como quedará los datos antes de ser enviados
+  submit_handler() {
+    // se hace otro grupo para que agarre SOLO el array llamado "array_fechas_apertura"
+    this.fechas_form = this.formBuilder.group({
+      // este es un array que dentro del él hay otro array que es el de "array_fechas"
+      // quedando asi como un objeto (eso lo agarra del metodo "get array_fechas")
+      array_fechas_apertura: [this.array_fechas.value]
+    });
+    // en este console log es como si fuera la peticion POST a la API
+    console.log(this.fechas_form.value);
+  }
+
   // metodo para enviar los datos a la API de CREAR APERTURA
-  asignar_plan_de_trabajo() {
+  crear_actividad_apertura() {
 
     // se agrupa en un array las fechas de inicio y fin
     this.fechas_form = this.formBuilder.group({
-      fecha_inicio: new FormControl({
-        value: this.fecha_inicio.value,
-        disabled: false
-      }),
-      fecha_fin: new FormControl({
-        value: this.fecha_fin.value,
-        disabled: false
-      })
+      array_fechas_apertura: [this.array_fechas.value]
     });
-
-    // se crea un objeto con el nombre tal cual la API pide que es "array_fechas_apertura"
-    // y dentro se coloca el array de las fechas de inicio y fin
-    this.objeto = {
-      array_fechas_apertura: [
-        this.fechas_form.value
-      ]
-    };
 
     // por ultimo se hace el POST a la API (Crear Apertura) con los parametros que pide como: la prioridad que se escogio en el formulario,
     // el numero de plan de trabajo y el contenido, que es el objeto que contiene el array de fechas de inicio y fin
     this.http
       .post(
         `${this.apiService.ip}/supervisores_api/public/api/CrearActividadApertura?id_prioridad=${this.number_id_prioridad.value
-        }&id_plan_trabajo=${this.number_id_plan_trabajo.value}`, this.objeto,
+        }&id_plan_trabajo=${this.number_id_plan_trabajo.value}`, this.fechas_form.value,
         { headers: this.apiService.headers_get }
       )
       .subscribe(
         respuesta => {
           // si el usuario envia los datos de manera incompleta se notifica en un alert la descripcion del error
-          // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
-          swal({
-            title: 'Actividad Apertura',
-            text: 'Plan de trabajo asignado exitosamente.',
-            type: 'success'
-          }).then(result => {
-            // para volver a la pagina anterior...
-            window.history.back();
-          });
-          console.log(respuesta);
+          if (!respuesta['succes']) {
+            swal({
+              title: 'Problemas con el envío',
+              text: JSON.stringify(respuesta),
+              type: 'warning'
+            });
+          } else {
+            // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
+            swal({
+              title: 'Actividad Apertura',
+              text: 'Plan de trabajo asignado exitosamente.',
+              type: 'success'
+            }).then(result => {
+              // para volver a la pagina anterior...
+              window.history.back();
+            });
+            console.log(respuesta);
+            console.log(this.fechas_form.value);
+          }
         },
         error => {
           swal({
@@ -166,5 +171,23 @@ export class PlanesformComponent implements OnInit {
           });
         }
       );
+
+    // pon esto en el NGSUBMIT del html para que con este metodo muestre en un console.log como se enviará los datos
+    // en la base de datos de la API
+    // simular_envio() {
+    //   this.fechas_form = this.formBuilder.group({
+    //     fecha_inicio: [this.fecha_inicio.value],
+    //     fecha_fin: [this.fecha_fin.value]
+    //   });
+    //   this.objeto = {
+    //     array_fechas_apertura: [
+    //       this.fechas_form.value
+    //     ]
+    //   };
+    //   console.log('solo fechas: ' + JSON.stringify(this.fechas_form.value));
+    //   console.log(typeof (this.fechas_form.value));
+    //   console.log(JSON.stringify(this.objeto));
+    //   console.log('dentro del objeto: ' + JSON.stringify(this.objeto['array_fechas_apertura']));
+    // }
   }
 }

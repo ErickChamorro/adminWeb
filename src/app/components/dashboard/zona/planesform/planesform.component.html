@@ -8,7 +8,7 @@
 <br />
 <div class="row">
   <div class="contenedor-tabla align-content-around">
-    <form [formGroup]="planesform" id="formulario">
+    <form [formGroup]="apertura_form" id="formulario">
       <div class="row">
         <div class="col-lg-12 form-group">
           <h4>
@@ -39,31 +39,38 @@
         <div class="col-lg-1"></div>
       </div>
       <!-- ***********  FILA QUE CONTIENE LOS INPUTS DE FECHA INICO Y FIN PARA CONTROLAR EL DUPLICADO DE ÉSTE  ********* -->
-      <div class="row align-items-end">
-        <div class="col-lg-5 col-sm-5 col-5 form-group">
-          <label for="inicio">Inicia actividad:</label> <br />
-          <input class="form-control" type="date" formControlName="fecha_inicio" name="inicio" id="inicio" placeholder="dd/mm/aa" />
-        </div>
-        <div class="col-lg-5 col-sm-5 col-5 form-group">
-          <label for="fin" class="fin">Termina:</label> <br />
-          <input class="form-control" type="date" formControlName="fecha_fin" name="fin" id="fin" placeholder="dd/mm/aa" />
-        </div>
-        <div class="col-lg-1 col-sm-1 col-1 form-group">
-          <button mat-mini-fab class="botones" id="btnAgregar" data-content="Agregar fechas" rel="popover"
-            data-placement="top">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
-        <div class="col-lg-1 col-sm-1 col-1 form-group">
-          <button mat-mini-fab class="botones" id="btnVer" data-content="Eliminar" rel="popover" data-placement="top">
-            <mat-icon>close</mat-icon>
-          </button>
+      <div class="row align-items-end" formArrayName="array_fechas_apertura">
+        <div class="col-lg-12" *ngFor="let group of array_fechas.controls; let i = index;" [formGroupName]="i">
+          <div class="row align-items-end">
+            <div class="col-lg-5 col-sm-5 col-5 form-group">
+              <label for="inicio">Inicia actividad:</label> <br />
+              <input class="form-control" type="date" formControlName="fecha_inicio" name="inicio" id="inicio"
+                placeholder="dd/mm/aa" />
+            </div>
+            <div class="col-lg-5 col-sm-5 col-5 form-group">
+              <label for="fin" class="fin">Termina:</label> <br />
+              <input class="form-control" type="date" formControlName="fecha_fin" name="fin" id="fin" placeholder="dd/mm/aa" />
+            </div>
+            <div class="col-lg-1 col-sm-1 col-1 form-group">
+              <button mat-mini-fab class="botones" id="btnAgregar" data-content="Agregar fechas" rel="popover"
+                data-placement="top" (click)="agregar_fechas()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <div class="col-lg-1 col-sm-1 col-1 form-group">
+              <button mat-mini-fab class="botones" id="btnEliminar" data-content="Eliminar" rel="popover"
+                data-placement="top" (click)="eliminar_fechas(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <br>
       <div class="row">
         <div class="col-lg-12">
-          <button mat-button id="btnEnviar" type="submit" value="Crear actividad Apertura">Crear actividad Apertura</button>
+          <button mat-button id="btnEnviar" (click)="crear_actividad_apertura()" value="Crear actividad Apertura">Crear
+            actividad Apertura</button>
         </div>
       </div>
     </form>
@@ -87,7 +94,7 @@
               data-placement="top">
               <mat-icon>add</mat-icon>
             </button>
-            <button mat-mini-fab class="botones" id="btnVer" data-content="Ver lista" rel="popover" data-placement="top">
+            <button mat-mini-fab class="botones" id="btnEliminar" data-content="Ver lista" rel="popover" data-placement="top">
               <mat-icon>visibility</mat-icon>
             </button>
           </div>

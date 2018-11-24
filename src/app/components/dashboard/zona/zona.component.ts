@@ -31,11 +31,11 @@ export class ZonaComponent implements OnInit {
       this.navbar.get_detalle_zona(data['id']).subscribe(sucursales => {
         // variable donde se guarda el array que muestre las droguerias
         this.sucursales = sucursales['sucursal'];
-        console.log(this.sucursales);
+        // console.log(this.sucursales);
         // variable donde guarda el nombre de la zona
         this.parametro_id_zona = sucursales['zona']['descripcion_zona'];
         this.id_zona = sucursales['sucursal']['0']['id_suscursal'];
-        console.log(this.id_zona);
+        // console.log(this.id_zona);
 
         // si quieres ver que nombre de la zona es en la consola descomenta la linea de abajo
         // console.log(this.sucursales);
