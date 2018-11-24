@@ -15,7 +15,7 @@ declare var $: any;
 })
 export class PlanesformComponent implements OnInit {
   // variable que guarda TODOS los campos del formulario de plan de trabajo
-  planesform: FormGroup;
+  apertura_form: FormGroup;
   // variable que agrupa SOLO las fechas de inicio y fin al momento de presionar el boton de enviar
   fechas_form: FormGroup;
   // estado del boton al iniciar la pagina
@@ -38,11 +38,10 @@ export class PlanesformComponent implements OnInit {
   ) {
     this.respuesta_servidor = true;
     // grupo donde contiene TODOS los campos
-    this.planesform = this.formBuilder.group({
+    this.apertura_form = this.formBuilder.group({
       id_plan_trabajo: [1],
       id_prioridad: [],
-      fecha_inicio: [],
-      fecha_fin: []
+      array_fechas_apertura: this.formBuilder.array([this.agregar_grupo_fechas()])
     });
   }
 
@@ -55,21 +54,28 @@ export class PlanesformComponent implements OnInit {
     $('#btnVer').popover({ trigger: 'hover' });
   }
 
+  agregar_grupo_fechas() {
+    return this.formBuilder.group({
+      fecha_inicio: [],
+      fecha_fin: []
+    });
+  }
+
   // pon esto en el NGSUBMIT del html para que con este metodo muestre en un console.log como se enviará los datos
   // en la base de datos de la API
   simular_envio() {
     this.fechas_form = this.formBuilder.group({
-      fecha_inicio: [],
-      fecha_fin: []
+      fecha_inicio: [this.fecha_inicio.value],
+      fecha_fin: [this.fecha_fin.value]
     });
     this.objeto = {
       array_fechas_apertura: [
-        this.planesform.value
+        this.fechas_form.value
       ]
     };
     console.log('solo fechas: ' + JSON.stringify(this.fechas_form.value));
     console.log(typeof (this.fechas_form.value));
-    console.log('array de fechas apertura: ' + JSON.stringify(this.objeto));
+    console.log(JSON.stringify(this.objeto));
     console.log('dentro del objeto: ' + JSON.stringify(this.objeto['array_fechas_apertura']));
   }
 
@@ -90,34 +96,21 @@ export class PlanesformComponent implements OnInit {
   }
 
   // valores del formulario de planes de trabajo obtenidas independientemente
-  // estos datos los agarra de planesform
+  // estos datos los agarra de apertura_form
   get number_id_plan_trabajo() {
-    return this.planesform.get('id_plan_trabajo');
+    return this.apertura_form.get('id_plan_trabajo');
   }
 
   get number_id_prioridad() {
-    return this.planesform.get('id_prioridad');
+    return this.apertura_form.get('id_prioridad');
   }
 
   get fecha_inicio() {
-    return this.planesform.get('fecha_inicio');
+    return this.apertura_form.get('fecha_inicio');
   }
 
   get fecha_fin() {
-    return this.planesform.get('fecha_fin');
-  }
-
-  agregar_array_fechas() {
-    return this.formBuilder.group({
-      fecha_inicio: new FormControl({
-        value: this.fecha_inicio.value,
-        disabled: false
-      }),
-      fecha_fin: new FormControl({
-        value: this.fecha_fin.value,
-        disabled: false
-      })
-    });
+    return this.apertura_form.get('fecha_fin');
   }
 
   // metodo para enviar los datos a la API de CREAR APERTURA
