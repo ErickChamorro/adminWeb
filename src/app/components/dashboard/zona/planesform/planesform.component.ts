@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import swal from 'sweetalert2';
 
+declare var $: any;
+
 @Component({
   selector: 'app-planesform',
   templateUrl: './planesform.component.html',
@@ -37,10 +39,10 @@ export class PlanesformComponent implements OnInit {
     this.respuesta_servidor = true;
     // grupo donde contiene TODOS los campos
     this.planesform = this.formBuilder.group({
-      id_plan_trabajo: new FormControl({ value: 1, disabled: false }),
-      id_prioridad: new FormControl({ value: null }),
-      fecha_inicio: new FormControl({ value: '', disabled: false }),
-      fecha_fin: new FormControl({ value: '', disabled: false })
+      id_plan_trabajo: [1],
+      id_prioridad: [],
+      fecha_inicio: [],
+      fecha_fin: []
     });
   }
 
@@ -49,24 +51,20 @@ export class PlanesformComponent implements OnInit {
     this.get_sucursal();
     // metodo para mostrar las prioridades en un select
     this.mostrar_prioridad();
+    $('#btnAgregar').popover({ trigger: 'hover' });
+    $('#btnVer').popover({ trigger: 'hover' });
   }
 
   // pon esto en el NGSUBMIT del html para que con este metodo muestre en un console.log como se enviará los datos
   // en la base de datos de la API
   simular_envio() {
     this.fechas_form = this.formBuilder.group({
-      fecha_inicio: new FormControl({
-        value: this.fecha_inicio.value,
-        disabled: false
-      }),
-      fecha_fin: new FormControl({
-        value: this.fecha_fin.value,
-        disabled: false
-      })
+      fecha_inicio: [],
+      fecha_fin: []
     });
     this.objeto = {
       array_fechas_apertura: [
-        this.fechas_form.value
+        this.planesform.value
       ]
     };
     console.log('solo fechas: ' + JSON.stringify(this.fechas_form.value));
@@ -78,14 +76,16 @@ export class PlanesformComponent implements OnInit {
   get_sucursal() {
     // funcion para gestionar parametros
     this.route.params.subscribe(data => {
+      console.log(data);
       this.nombre_sucursal = data['id'];
+
     });
   }
 
   mostrar_prioridad() {
     this.navbar.mostrar_prioridad().subscribe(data => {
       this.prioridades = data['prioridades'];
-      console.log(this.prioridades);
+      // console.log(this.prioridades);
     });
   }
 
@@ -105,6 +105,19 @@ export class PlanesformComponent implements OnInit {
 
   get fecha_fin() {
     return this.planesform.get('fecha_fin');
+  }
+
+  agregar_array_fechas() {
+    return this.formBuilder.group({
+      fecha_inicio: new FormControl({
+        value: this.fecha_inicio.value,
+        disabled: false
+      }),
+      fecha_fin: new FormControl({
+        value: this.fecha_fin.value,
+        disabled: false
+      })
+    });
   }
 
   // metodo para enviar los datos a la API de CREAR APERTURA
@@ -142,23 +155,15 @@ export class PlanesformComponent implements OnInit {
         respuesta => {
           // si el usuario envia los datos de manera incompleta se notifica en un alert la descripcion del error
           // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
-          if (respuesta !== 'Actividad Apertura creada') {
-            swal({
-              title: 'Error con el envío',
-              text: JSON.stringify(respuesta),
-              type: 'error'
-            });
-          } else {
-            swal({
-              title: 'Actividad Apertura',
-              text: 'Plan de trabajo asignado exitosamente.',
-              type: 'success'
-            }).then(result => {
-              // para volver a la pagina anterior...
-              window.history.back();
-            });
-            console.log(respuesta);
-          }
+          swal({
+            title: 'Actividad Apertura',
+            text: 'Plan de trabajo asignado exitosamente.',
+            type: 'success'
+          }).then(result => {
+            // para volver a la pagina anterior...
+            window.history.back();
+          });
+          console.log(respuesta);
         },
         error => {
           swal({

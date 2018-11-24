@@ -6,7 +6,7 @@ import { isNullOrUndefined } from 'util';
   providedIn: 'root'
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // ip = 'http://192.168.1.4'; // servidor SENTOS
   // ip = 'http://192.168.1.64';    // servidor cudris
@@ -43,7 +43,7 @@ export class ApiService {
   get_detalle_zona(id_zona: number) {
     const api_url = `${
       this.ip
-    }/supervisores_api/public/api/sucursalesZona/${id_zona}`;
+      }/supervisores_api/public/api/sucursalesZona/${id_zona}`;
     return this.http.get(api_url, { headers: this.headers_get });
   }
 
@@ -63,4 +63,5 @@ export class ApiService {
   //   const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
   //   return this.http.get(api_url, { headers: this.headers_get });
   // }
+
 }

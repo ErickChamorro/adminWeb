@@ -73,6 +73,11 @@ export class NavbarComponent implements OnInit {
     return this.http.get(api_url, { headers: this.headers });
   }
 
+  public getZona(id) {
+    const api_url = this.apiService.ip + '/supervisores_api/public/api/sucursalesZona/' + id;
+    return this.http.get(api_url, { headers: this.headers }).subscribe(data => console.log(data));
+  }
+
   // mostrar prioridad
   mostrar_prioridad() {
     const api_url = `${

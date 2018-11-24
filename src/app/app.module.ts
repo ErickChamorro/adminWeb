@@ -86,4 +86,4 @@ import { PlanesformComponent } from './components/dashboard/zona/planesform/plan
   providers: [NavbarComponent, UserService, ApiService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

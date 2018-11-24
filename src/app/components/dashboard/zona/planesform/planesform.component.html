@@ -6,46 +6,79 @@
   </div>
 </div>
 <br />
-<div class="" style="padding-right: 50px;">
-  <div class="row contenedor-tabla align-content-around">
-    <div class="col-lg-5">
-      <h4>ordinario</h4>
-      <p>{{ planesform.value | json }}</p>
-    </div>
+<div class="row">
+  <div class="contenedor-tabla align-content-around">
+    <form [formGroup]="planesform" (ngSubmit)="simular_envio()" id="formulario">
+      <div class="row justify-content-between align-items-center form_apertura_checked">
+        <div class="col-9">
+          <h4>
+            <mat-checkbox id="check_apertura" color="primary" data-target=".form_apertura">
+              Apertura
+            </mat-checkbox>
+          </h4>
+        </div>
+        <div class="col-3 cont_botones justify-content-around">
+          <button mat-mini-fab class="botones" id="btnAgregar" data-content="Agregar a la lista" rel="popover"
+            data-placement="top">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-mini-fab class="botones" id="btnVer" data-content="Ver lista" rel="popover" data-placement="top">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </div>
+        <div class="row fila_dos">
+          <div class="col-lg-3 col-md-6 col-sm-6 form-group">
+            <label>id. plan de trabajo</label>
+            <br>
+            <input class="form-control" formControlName="id_plan_trabajo" type="text" value="" readonly />
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 form-group">
+            <label for="prioridad">prioridad</label> <br />
+            <select class="form-control" formControlName="id_prioridad" name="prioridad" id="prioridad">
+              <option *ngFor="let prioridad of prioridades" value="{{prioridad.id_prioridad}}">{{
+                prioridad.nombre }}</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 form-group">
+            <label for="inicio">Inicio</label> <br />
+            <input class="form-control" type="date" formControlName="fecha_inicio" name="inicio" id="inicio"
+              placeholder="dd/mm/aa" />
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 form-group">
+            <label for="fin">Fin</label> <br />
+            <input class="form-control" type="date" formControlName="fecha_fin" name="fin" id="fin" placeholder="dd/mm/aa" />
+          </div>
+        </div>
+      </div>
+    </form>
 
-    <!--
-      ***********************************************************************************
-    -->
-    <div class="col-lg-5">
-      <h4>con reactive form</h4>
-      <form action="" [formGroup]="planesform" (ngSubmit)="asignar_plan_de_trabajo()">
-        <div class="form-group">
-          <label>id. plan de trabajo</label> <br />
-          <input class="form-control" formControlName="id_plan_trabajo" type="text" value="" readonly />
-        </div>
-        <div class="form-group">
-          <label for="prioridad">prioridad</label> <br />
-          <select class="form-control" formControlName="id_prioridad" name="prioridad" id="prioridad">
-            <!-- <option value="" hidden selected>Seleccione...</option> -->
-            <option *ngFor="let prioridad of prioridades" value="{{prioridad.id_prioridad}}">{{
-              prioridad.nombre }}</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="inicio">Inicio</label> <br />
-          <input class="form-control" type="date" formControlName="fecha_inicio" name="inicio" id="inicio" placeholder="dd/mm/aa" />
-        </div>
-        <br />
-        <div class="form-group">
-          <label for="fin">Fin</label> <br />
-          <input class="form-control" type="date" formControlName="fecha_fin" name="fin" id="fin" placeholder="dd/mm/aa" />
-          <br />
-        </div>
-        <br />
-        <div class="form-group">
-          <input class="btn btn-success" type="submit" value="enviar" />
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+    <!-- <div class="col-lg-5">
+          <h4>con reactive form</h4>
+          <form action="" [formGroup]="planesform" (ngSubmit)="asignar_plan_de_trabajo()">
+            <div class="form-group">
+              <label>id. plan de trabajo</label> <br />
+              <input class="form-control" formControlName="id_plan_trabajo" type="text" value="" readonly />
+            </div>
+            <div class="form-group">
+              <label for="prioridad">prioridad</label> <br />
+              <select class="form-control" formControlName="id_prioridad" name="prioridad" id="prioridad">
+                <option *ngFor="let prioridad of prioridades" value="{{prioridad.id_prioridad}}">{{
+                  prioridad.nombre }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inicio">Inicio</label> <br />
+              <input class="form-control" type="date" formControlName="fecha_inicio" name="inicio" id="inicio" placeholder="dd/mm/aa" />
+            </div>
+            <br />
+            <div class="form-group">
+              <label for="fin">Fin</label> <br />
+              <input class="form-control" type="date" formControlName="fecha_fin" name="fin" id="fin" placeholder="dd/mm/aa" />
+              <br />
+            </div>
+            <br />
+            <div class="form-group">
+              <input class="btn btn-success" type="submit" value="enviar" />
+            </div>
+          </form>
+        </div> -->

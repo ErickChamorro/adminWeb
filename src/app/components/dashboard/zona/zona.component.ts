@@ -13,10 +13,11 @@ import { NavbarComponent } from '../../../shared/navbar/navbar.component';
 export class ZonaComponent implements OnInit {
   // data que extrae del api de sucursales
   sucursales: any;
+  id_zona: any;
 
   // variable que contiene el nombre de la zona que se mostrara en este componente
   parametro_id_zona = '';
-  constructor(private route: ActivatedRoute, private navbar: NavbarComponent) {}
+  constructor(private route: ActivatedRoute, public navbar: NavbarComponent) { }
 
   ngOnInit() {
     // funcion que muestra el listado de droguerias de la zona
@@ -30,8 +31,11 @@ export class ZonaComponent implements OnInit {
       this.navbar.get_detalle_zona(data['id']).subscribe(sucursales => {
         // variable donde se guarda el array que muestre las droguerias
         this.sucursales = sucursales['sucursal'];
+        console.log(this.sucursales);
         // variable donde guarda el nombre de la zona
         this.parametro_id_zona = sucursales['zona']['descripcion_zona'];
+        this.id_zona = sucursales['sucursal']['0']['id_suscursal'];
+        console.log(this.id_zona);
 
         // si quieres ver que nombre de la zona es en la consola descomenta la linea de abajo
         // console.log(this.sucursales);

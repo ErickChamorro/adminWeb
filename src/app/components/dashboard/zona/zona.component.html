@@ -41,11 +41,7 @@
             <!--
               y el (data-backdrop="static") es para prevenir que el modal se cierre clickeando afuera de él.
             -->
-            <button
-              mat-menu-item
-              router
-              [routerLink]="['formulario', sucursal.sucursal]"
-            >
+            <button mat-menu-item [routerLink]="['formulario', sucursal.id_suscursal]">
               <mat-icon>add</mat-icon>
               <span>Crear plan de trabajo</span>
             </button>
@@ -53,6 +49,7 @@
               <mat-icon>visibility</mat-icon>
               <span>Ver planes de trabajo</span>
             </button>
+            <button mat-menu-item (click)="navbar.getZona(id_zona)">IDdsfdsf</button>
             <!-- eliminar plan de trabajo -->
             <!--
               <button mat-menu-item>
@@ -70,31 +67,16 @@
     ************************************************    MODAL    *****************************************************
   -->
 
-  <div
-    class="modal fade bd-example-modal-lg"
-    id="exampleModalCenter"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true"
-  >
-    <div
-      class="modal-dialog modal-dialog modal-lg"
-      role="document"
-      style="height:500px; width: auto; padding: 50px;"
-    >
+  <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog modal-lg" role="document" style="height:500px; width: auto; padding: 50px;">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">
             Gestor de planes de trabajo
             <!-- {{nombre_sucursal}} -->
           </h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
