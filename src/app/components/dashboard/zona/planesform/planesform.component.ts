@@ -79,7 +79,7 @@ export class PlanesformComponent implements OnInit {
     });
   }
 
-  // valores del formulario de planes de trabajo obtenidas independientemente
+  // ****************  valores del formulario de planes de trabajo obtenidas independientemente ***************************
   // estos datos los agarra de apertura_form
   get number_id_plan_trabajo() {
     return this.apertura_form.get('id_plan_trabajo');
@@ -109,10 +109,16 @@ export class PlanesformComponent implements OnInit {
 
   // ********** METODO PARA ELIMINAR FECHAS *******************
   eliminar_fechas(index) {
-    this.array_fechas.removeAt(index);
+    // validacion para que el usuario NO elimine el unico item que aparece siempre al inicio.
+    // si hay mas de un elemento, entonces si puede eliminar, de lo contrario, si queda solo uno, ese no se elimina.
+    if (this.array_fechas.length === 1) {
+      alert('ése es el único item!');
+    } else {
+      this.array_fechas.removeAt(index);
+    }
   }
 
-  // metodo para simular un envio: muestra en la consola como quedará los datos antes de ser enviados
+  // metodo para simular un envio: nada mas muestra en la consola como quedará los datos antes de ser enviados
   submit_handler() {
     // se hace otro grupo para que agarre SOLO el array llamado "array_fechas_apertura"
     this.fechas_form = this.formBuilder.group({
@@ -124,70 +130,68 @@ export class PlanesformComponent implements OnInit {
     console.log(this.fechas_form.value);
   }
 
-  // metodo para enviar los datos a la API de CREAR APERTURA
+  // ********************************   metodo para enviar los datos a la API de CREAR APERTURA *********************************
   crear_actividad_apertura() {
 
-    // se agrupa en un array las fechas de inicio y fin
+    // se agrupa en un array las fechas de inicio y fin,
+    // creando un nuevo form group
     this.fechas_form = this.formBuilder.group({
       array_fechas_apertura: [this.array_fechas.value]
     });
 
     // por ultimo se hace el POST a la API (Crear Apertura) con los parametros que pide como: la prioridad que se escogio en el formulario,
-    // el numero de plan de trabajo y el contenido, que es el objeto que contiene el array de fechas de inicio y fin
+    // el numero de plan de trabajo y el contenido, que es el objeto que está arriba que contiene el array de fechas de inicio y fin
     this.http
       .post(
         `${this.apiService.ip}/supervisores_api/public/api/CrearActividadApertura?id_prioridad=${this.number_id_prioridad.value
         }&id_plan_trabajo=${this.number_id_plan_trabajo.value}`, this.fechas_form.value,
-        { headers: this.apiService.headers_get }
+        { headers: this.navbar.headers }
       )
       .subscribe(
         respuesta => {
           // si el usuario envia los datos de manera incompleta se notifica en un alert la descripcion del error
+          // si la respuesta de parte del servidor es diferente a "actividad apertura creada".......
           if (!respuesta['succes']) {
             swal({
               title: 'Problemas con el envío',
               text: JSON.stringify(respuesta),
               type: 'warning'
             });
+            console.log(respuesta);
           } else {
             // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
+            // si no hace esto: pasa a error, donde habrá mas validaciones
             swal({
               title: 'Actividad Apertura',
-              text: 'Plan de trabajo asignado exitosamente.',
+              text: JSON.stringify(respuesta['succes']),
               type: 'success'
             }).then(result => {
               // para volver a la pagina anterior...
-              window.history.back();
+              // window.history.back();
+              // para recargar pagina...
+              // location.reload();
             });
             console.log(respuesta);
             console.log(this.fechas_form.value);
           }
         },
         error => {
-          swal({
-            title: 'Datos no enviados',
-            text: JSON.stringify(error),
-            type: 'error'
-          });
+          if (error.status === 400) {
+            swal({
+              title: 'Error ' + error.status + ': ' + JSON.stringify(error['statusText']),
+              text: 'inconsistencia con las fechas, asegúrate que las fechas no sean de días antes del día actual.',
+              type: 'error'
+            });
+            console.log(error);
+          } else {
+            swal({
+              title: 'Datos no enviados',
+              text: JSON.stringify(error),
+              type: 'error'
+            });
+            console.log(error);
+          }
         }
       );
-
-    // pon esto en el NGSUBMIT del html para que con este metodo muestre en un console.log como se enviará los datos
-    // en la base de datos de la API
-    // simular_envio() {
-    //   this.fechas_form = this.formBuilder.group({
-    //     fecha_inicio: [this.fecha_inicio.value],
-    //     fecha_fin: [this.fecha_fin.value]
-    //   });
-    //   this.objeto = {
-    //     array_fechas_apertura: [
-    //       this.fechas_form.value
-    //     ]
-    //   };
-    //   console.log('solo fechas: ' + JSON.stringify(this.fechas_form.value));
-    //   console.log(typeof (this.fechas_form.value));
-    //   console.log(JSON.stringify(this.objeto));
-    //   console.log('dentro del objeto: ' + JSON.stringify(this.objeto['array_fechas_apertura']));
-    // }
   }
 }
