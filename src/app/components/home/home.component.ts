@@ -65,6 +65,15 @@ export class HomeComponent implements OnInit {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 1000);
+
+    // validar que la persona esté logeada para no tener que volver a iniciar sesion en caso de que perdio la sesion,
+    // y todavia conserva el token
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      console.log('no hay token');
+    }
+
   }
 
   // accede a los controles de loginform

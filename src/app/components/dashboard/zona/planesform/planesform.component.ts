@@ -24,10 +24,12 @@ export class PlanesformComponent implements OnInit {
   // array donde guardará otro array que es el de las fechas para que sea un objeto que contendrá un array
   objeto = {};
   public respuesta_servidor: boolean;
-  // variable donde guarda el nombre de la sucursal a la que se enviará el plan de trabajo
-  nombre_sucursal: any;
-  // supervisor
-  nombre_supervisor: any;
+  // variable donde guarda el id de la sucursal a la que se enviará el plan de trabajo
+  id_sucursal: any;
+  // variable donde guarda el id supervisor
+  id_supervisor: any;
+  // variable donde guarda el id_plan de trabajo que la API me retorna
+  id_plan_trabajo: any;
   // variable donde guardará la lista de prioridades que se usará en un select y de ahi sacar el ID de cada prioridad
   prioridades: any;
   constructor(
@@ -41,34 +43,36 @@ export class PlanesformComponent implements OnInit {
     this.respuesta_servidor = true;
     // grupo donde contiene TODOS los campos
     this.apertura_form = this.formBuilder.group({
-      id_plan_trabajo: [],
       id_prioridad: [],
       array_fechas_apertura: this.formBuilder.array([this.grupo_fechas()])
     });
   }
 
   ngOnInit() {
-    // metodo para mostrar el nombre de la sucursal
-    this.get_sucursal();
+    this.cargar_plan_de_trabajo();
     // metodo para mostrar las prioridades en un select
     this.mostrar_prioridad();
+    // console.log(this.route);
+  }
 
-    console.log(this.route);
+  cargar_plan_de_trabajo() {
+    // metodo para mostrar los parametros de id_sucursal y id_supervisor
+    // para ser usado en el metodo de cargar_plan_de_trabajo
+    this.route.params.subscribe(data => {
+      this.http.post(`${this.apiService.ip}/supervisores_api/public/api/CrearPlanTrabajo`, data,
+        {
+          headers: this.apiService.headers_get
+        }).subscribe(respuesta => {
+          this.id_plan_trabajo = respuesta;
+          console.log(this.id_plan_trabajo);
+        });
+    });
   }
 
   grupo_fechas() {
     return this.formBuilder.group({
       fecha_inicio: [],
       fecha_fin: []
-    });
-  }
-
-  // metodo para usarlo en el titulo para que muestre el nombre de la sucursal
-  get_sucursal() {
-    // funcion para gestionar parametros
-    this.route.params.subscribe(data => {
-      this.nombre_sucursal = data['supervisor'];
-      // console.log(data);
     });
   }
 
@@ -80,27 +84,9 @@ export class PlanesformComponent implements OnInit {
     });
   }
 
-  // ****************  valores del formulario de planes de trabajo obtenidas independientemente ***************************
-  // estos datos los agarra de apertura_form
-  get number_id_plan_trabajo() {
-    return this.apertura_form.get('id_plan_trabajo');
-  }
-
-  get number_id_prioridad() {
-    return this.apertura_form.get('id_prioridad');
-  }
-
   get array_fechas() {
     // retorna el array que agarra de apertura_form
     return <FormArray>this.apertura_form.get('array_fechas_apertura');
-  }
-
-  get fecha_inicio() {
-    return this.apertura_form.get('fecha_inicio');
-  }
-
-  get fecha_fin() {
-    return this.apertura_form.get('fecha_fin');
   }
 
   // ********** METODO PARA AGREGAR MAS FECHAS ****************
@@ -128,23 +114,16 @@ export class PlanesformComponent implements OnInit {
       array_fechas_apertura: [this.array_fechas.value]
     });
     // en este console log es como si fuera la peticion POST a la API
-    console.log(this.fechas_form.value);
+    console.log(this.apertura_form.value);
+    console.log(this.id_plan_trabajo);
   }
 
   // ********************************   metodo para enviar los datos a la API de CREAR APERTURA *********************************
   crear_actividad_apertura() {
-
-    // se agrupa en un array las fechas de inicio y fin,
-    // creando un nuevo form group
-    this.fechas_form = this.formBuilder.group({
-      array_fechas_apertura: [this.array_fechas.value]
-    });
-
-    // por ultimo se hace el POST a la API (Crear Apertura) con los parametros que pide como: la prioridad que se escogio en el formulario,
-    // el numero de plan de trabajo y el contenido, que es el objeto que está arriba que contiene el array de fechas de inicio y fin
+    // se hace el POST a la API (Crear Apertura)
     this.http.post(
       `${this.apiService.ip}/supervisores_api/public/api/CrearActividadApertura`,
-      this.apertura_form.value, { headers: this.apiService.headers_get }
+      this.apertura_form.value, { params: this.id_plan_trabajo, headers: this.apiService.headers_get, }
     ).subscribe(respuesta => {
       // si el usuario envia los datos de manera incompleta se notifica en un alert la descripcion del error
       // si la respuesta de parte del servidor es diferente a "actividad apertura creada".......
@@ -169,7 +148,6 @@ export class PlanesformComponent implements OnInit {
           // location.reload();
         });
         console.log(respuesta);
-        console.log(this.fechas_form.value);
       }
     },
       error => {
