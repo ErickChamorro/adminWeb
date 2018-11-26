@@ -34,13 +34,17 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['formulario', sucursal.supervisor]">
+            <button mat-menu-item [routerLink]="['formulario', sucursal.supervisor, sucursal.sucursal]">
               <mat-icon>add</mat-icon>
               <span>Crear plan de trabajo</span>
             </button>
             <button mat-menu-item [routerLink]="['formulario']">
               <mat-icon>visibility</mat-icon>
               <span>Ver planes de trabajo</span>
+            </button>
+            <button mat-menu-item (click)="submit_tester(sucursal.id_supervisor, sucursal.id_suscursal)">
+              <mat-icon>add</mat-icon>
+              <span>plan con metodos, multiples parametros y todo</span>
             </button>
           </mat-menu>
         </th>

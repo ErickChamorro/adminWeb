@@ -42,4 +42,9 @@ export class ZonaComponent implements OnInit {
       });
     });
   }
+
+  submit_tester(supervisor: string, sucursal: number) {
+    console.log('id_supervisor: ' + supervisor);
+    console.log('id_sucursal: ' + sucursal);
+  }
 }

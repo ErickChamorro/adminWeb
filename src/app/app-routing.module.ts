@@ -24,7 +24,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'zona/:id/formulario/:id',
+        path: 'zona/:id/formulario/:supervisor/:sucursal',
         component: PlanesformComponent,
         canActivate: [AuthGuard]
       }

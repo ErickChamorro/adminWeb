@@ -26,6 +26,8 @@ export class PlanesformComponent implements OnInit {
   public respuesta_servidor: boolean;
   // variable donde guarda el nombre de la sucursal a la que se enviará el plan de trabajo
   nombre_sucursal: any;
+  // supervisor
+  nombre_supervisor: any;
   // variable donde guardará la lista de prioridades que se usará en un select y de ahi sacar el ID de cada prioridad
   prioridades: any;
   constructor(
@@ -33,13 +35,13 @@ export class PlanesformComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private navbar: NavbarComponent,
-    private apiService: ApiService,
+    public apiService: ApiService,
     private http: HttpClient
   ) {
     this.respuesta_servidor = true;
     // grupo donde contiene TODOS los campos
     this.apertura_form = this.formBuilder.group({
-      id_plan_trabajo: [1],
+      id_plan_trabajo: [],
       id_prioridad: [],
       array_fechas_apertura: this.formBuilder.array([this.grupo_fechas()])
     });
@@ -50,9 +52,8 @@ export class PlanesformComponent implements OnInit {
     this.get_sucursal();
     // metodo para mostrar las prioridades en un select
     this.mostrar_prioridad();
-    // funcion para los botones de AGREGAR Y ELIMINAR
-    $('#btnAgregar').popover({ trigger: 'hover' });
-    $('#btnEliminar').popover({ trigger: 'hover' });
+
+    console.log(this.route);
   }
 
   grupo_fechas() {
@@ -66,7 +67,7 @@ export class PlanesformComponent implements OnInit {
   get_sucursal() {
     // funcion para gestionar parametros
     this.route.params.subscribe(data => {
-      this.nombre_sucursal = data['id'];
+      this.nombre_sucursal = data['supervisor'];
       // console.log(data);
     });
   }
@@ -141,57 +142,53 @@ export class PlanesformComponent implements OnInit {
 
     // por ultimo se hace el POST a la API (Crear Apertura) con los parametros que pide como: la prioridad que se escogio en el formulario,
     // el numero de plan de trabajo y el contenido, que es el objeto que está arriba que contiene el array de fechas de inicio y fin
-    this.http
-      .post(
-        `${this.apiService.ip}/supervisores_api/public/api/CrearActividadApertura?id_prioridad=${this.number_id_prioridad.value
-        }&id_plan_trabajo=${this.number_id_plan_trabajo.value}`, this.fechas_form.value,
-        { headers: this.navbar.headers }
-      )
-      .subscribe(
-        respuesta => {
-          // si el usuario envia los datos de manera incompleta se notifica en un alert la descripcion del error
-          // si la respuesta de parte del servidor es diferente a "actividad apertura creada".......
-          if (!respuesta['succes']) {
-            swal({
-              title: 'Problemas con el envío',
-              text: JSON.stringify(respuesta),
-              type: 'warning'
-            });
-            console.log(respuesta);
-          } else {
-            // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
-            // si no hace esto: pasa a error, donde habrá mas validaciones
-            swal({
-              title: 'Actividad Apertura',
-              text: JSON.stringify(respuesta['succes']),
-              type: 'success'
-            }).then(result => {
-              // para volver a la pagina anterior...
-              // window.history.back();
-              // para recargar pagina...
-              // location.reload();
-            });
-            console.log(respuesta);
-            console.log(this.fechas_form.value);
-          }
-        },
-        error => {
-          if (error.status === 400) {
-            swal({
-              title: 'Error ' + error.status + ': ' + JSON.stringify(error['statusText']),
-              text: 'inconsistencia con las fechas, asegúrate que las fechas no sean de días antes del día actual.',
-              type: 'error'
-            });
-            console.log(error);
-          } else {
-            swal({
-              title: 'Datos no enviados',
-              text: JSON.stringify(error),
-              type: 'error'
-            });
-            console.log(error);
-          }
+    this.http.post(
+      `${this.apiService.ip}/supervisores_api/public/api/CrearActividadApertura`,
+      this.apertura_form.value, { headers: this.apiService.headers_get }
+    ).subscribe(respuesta => {
+      // si el usuario envia los datos de manera incompleta se notifica en un alert la descripcion del error
+      // si la respuesta de parte del servidor es diferente a "actividad apertura creada".......
+      if (!respuesta['succes']) {
+        swal({
+          title: 'Problemas con el envío',
+          text: JSON.stringify(respuesta),
+          type: 'warning'
+        });
+        console.log(respuesta);
+      } else {
+        // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
+        // si no hace esto: pasa a error, donde habrá mas validaciones
+        swal({
+          title: 'Actividad Apertura',
+          text: JSON.stringify(respuesta['succes']),
+          type: 'success'
+        }).then(result => {
+          // para volver a la pagina anterior...
+          // window.history.back();
+          // para recargar pagina...
+          // location.reload();
+        });
+        console.log(respuesta);
+        console.log(this.fechas_form.value);
+      }
+    },
+      error => {
+        if (error.status === 400) {
+          swal({
+            title: 'Error ' + error.status + ': ' + JSON.stringify(error['statusText']),
+            text: 'inconsistencia con las fechas, asegúrate que las fechas no sean de días antes del día actual.',
+            type: 'error'
+          });
+          console.log(error);
+        } else {
+          swal({
+            title: 'Datos no enviados',
+            text: JSON.stringify(error),
+            type: 'error'
+          });
+          console.log(error);
         }
-      );
+      }
+    );
   }
 }

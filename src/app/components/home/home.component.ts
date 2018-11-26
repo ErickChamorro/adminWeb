@@ -72,6 +72,11 @@ export class HomeComponent implements OnInit {
     return this.loginForm.controls;
   }
 
+  // manejador de envios: muestra en consola como sera enviado los datos
+  submit_handler() {
+    console.log(this.loginForm.value);
+  }
+
   // metodo que se ejecuta al presionar el boton de iniciar en el HTML
   // *******************************      LOGIN (el LOGOUT está en navbar.component.ts )       *************************
   iniciarSesion() {
@@ -92,13 +97,12 @@ export class HomeComponent implements OnInit {
       /** spinner ends after 5 seconds */
 
       // hacer el post al api para comprobar que usuario existe para recibir el TOKEN
-      this.http
-        .post(
-          `${this.apiService.ip}/supervisores_api/public/api/login`,
-          // parametros extraidos del HTML
-          JSON.stringify(this.loginForm.value),
-          { headers: this.apiService.headers_post }
-        )
+      this.http.post(
+        `${this.apiService.ip}/supervisores_api/public/api/login`,
+        // parametros extraidos del HTML
+        JSON.stringify(this.loginForm.value),
+        { headers: this.apiService.headers_post }
+      )
         .subscribe(
           data => {
             // variable que guarda el dato del token que recibió de la respuesta del servidor
@@ -148,7 +152,7 @@ export class HomeComponent implements OnInit {
     swal({
       title: 'Reestablecer contraseña',
       text:
-        'paso 1: ingrese su correo electronico para mandarte la nueva contraseña, después podras iniciar sesion nuevamente.',
+        'Ingrese su correo electrónico para gestionar una nueva contraseña, después podrás iniciar sesión nuevamente.',
       input: 'text',
       inputPlaceholder: 'Dirección de correo eléctronico',
       padding: 70,
