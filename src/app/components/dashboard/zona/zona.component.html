@@ -34,7 +34,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['formulario', sucursal.id_suscursal, sucursal.id_supervisor]">
+            <button mat-menu-item (click)="crear_plan_de_trabajo(sucursal.id_suscursal, fecha_creacion, sucursal.id_supervisor)">
               <mat-icon>add</mat-icon>
               <span>Crear plan de trabajo</span>
             </button>

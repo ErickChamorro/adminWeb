@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-lg-12">
     <h2>
-      Gestor de planes de trabajo para: <i>{{ nombre_sucursal }}</i>
+      Gestor de planes de trabajo para: <i></i>
     </h2>
   </div>
 </div>
 <br />
 <div class="row">
   <div class="contenedor-tabla align-content-around">
-    <form [formGroup]="apertura_form" id="formulario">
+    <form [formGroup]="planes_form" id="formulario">
       <div class="row">
         <div class="col-lg-6"></div>
       </div>
@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-lg-5 form-group">
           <label for="">Actividad:</label>
-          <select name="" id="" class="form-control" data-size="auto">
+          <select name="" id="" class="form-control" data-size="auto" formControlName="tipo_actividad">
             <option value="null" selected>Seleccione...</option>
             <option value="apertura">1. Apertura del punto de venta</option>
             <option value="ingreso">2. Ingreso a la sucursal</option>
@@ -86,7 +86,7 @@
       <br>
       <div class="row">
         <div class="col-lg-12">
-          <button mat-button id="btnEnviar" name="btnEliminar" (click)="crear_actividad_apertura()" value="Crear actividad Apertura">Crear
+          <button mat-button id="btnEnviar" name="btnEliminar" (click)="submit_handler()" value="Crear actividad Apertura">Crear
             actividad</button>
         </div>
       </div>
