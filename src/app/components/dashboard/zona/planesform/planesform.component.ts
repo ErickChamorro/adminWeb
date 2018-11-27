@@ -106,9 +106,10 @@ export class PlanesformComponent implements OnInit {
 
   // ********************************   metodo para enviar los datos a la API de CREAR APERTURA *********************************
   crear_actividad_apertura() {
-    // se hace el POST a la API (Crear Apertura)
+    // primero extrae el parametro que viene desde la pagina de zona component, necesario para hacer el POST
     this.route.params.subscribe(params => {
       this.id_plan_trabajo = params;
+      // se hace el POST a la API (Crear Apertura)
       this.http.post(
         `${this.apiService.ip}/supervisores_api/public/api/CrearActividadApertura`,
         this.planes_form.value, { params: this.id_plan_trabajo, headers: this.apiService.headers_get, }
