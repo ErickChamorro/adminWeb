@@ -13,19 +13,19 @@ export class ApiService {
   ip = 'http://192.168.1.185';
 
   // ----------  CABECERA GET  ---------------
-  headers_get: HttpHeaders = new HttpHeaders({
+  public headers_get: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
     Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
   });
 
   // ----------  CABECERA POST   -----------------
-  headers_post: HttpHeaders = new HttpHeaders({
+  public headers_post: HttpHeaders = new HttpHeaders({
     Authorization: 'Access',
     'Content-Type': 'application/json'
   });
 
   // ----------  CABECERA PLANES POST ------------
-  headers_planes: HttpHeaders = new HttpHeaders({
+  public headers_planes: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
     'Content-Type': 'application/json'
   });
@@ -59,9 +59,9 @@ export class ApiService {
   }
 
   // // mostrar prioridad
-  // mostrar_prioridad() {
-  //   const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
-  //   return this.http.get(api_url, { headers: this.headers_get });
-  // }
+  public mostrar_prioridad() {
+    const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
+    return this.http.get(api_url, { headers: this.headers_get });
+  }
 
 }

@@ -60,7 +60,7 @@ export class PlanesformComponent implements OnInit {
 
   // metodo para consumir API de prioridades y mostrarmelas en un SELECT
   mostrar_prioridad() {
-    this.navbar.mostrar_prioridad().subscribe(data => {
+    this.apiService.mostrar_prioridad().subscribe(data => {
       this.prioridades = data['prioridades'];
       // console.log(this.prioridades);
     });
@@ -132,7 +132,7 @@ export class PlanesformComponent implements OnInit {
             type: 'success'
           }).then(result => {
             // para volver a la pagina anterior...
-            // window.history.back();
+            window.history.back();
             // para recargar pagina...
             // location.reload();
           });
