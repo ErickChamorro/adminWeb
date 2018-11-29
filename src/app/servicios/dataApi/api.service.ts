@@ -9,8 +9,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   // ip = 'http://192.168.1.4'; // servidor SENTOS
-  // ip = 'http://192.168.1.64';    // servidor cudris
-  ip = 'http://192.168.1.185';
+  ip = 'http://192.168.1.185';  // servidor jonathan
 
   // ----------  CABECERA GET  ---------------
   public headers_get: HttpHeaders = new HttpHeaders({
@@ -25,10 +24,10 @@ export class ApiService {
   });
 
   // ----------  CABECERA PLANES POST ------------
-  public headers_planes: HttpHeaders = new HttpHeaders({
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  });
+  // public headers_planes: HttpHeaders = new HttpHeaders({
+  //   Accept: 'application/json',
+  //   'Content-Type': 'application/json'
+  // });
 
   // api Login
   // esa está en el Homecomponent.ts
