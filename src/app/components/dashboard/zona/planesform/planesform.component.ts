@@ -26,6 +26,10 @@ export class PlanesformComponent implements OnInit {
   id_plan_trabajo: any;
   // variable donde guardará la lista de prioridades que se usará en un select y de ahi sacar el ID de cada prioridad
   prioridades: any;
+
+  array_actividades = {};
+  objeto = {};
+  number: any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -47,7 +51,7 @@ export class PlanesformComponent implements OnInit {
     this.mostrar_prioridad();
     // console.log(this.route);
     this.route.params.subscribe(res => {
-      console.log(res);
+      console.log(res['id_plan_trabajo']);
     });
   }
 
@@ -124,33 +128,55 @@ export class PlanesformComponent implements OnInit {
           });
           console.log(respuesta);
         } else {
-          // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
-          // si no hace esto: pasa a error, donde habrá mas validaciones
-          swal({
-            title: 'Actividad Apertura',
-            text: JSON.stringify(respuesta['succes']),
-            type: 'success'
-          }).then(result => {
-            // para volver a la pagina anterior...
-            window.history.back();
-            // para recargar pagina...
-            // location.reload();
+          // post insercion aqui?
+          this.array_actividades = [{
+            id_prioridad: this.planes_form.value['id_prioridad'],
+            nombre_tabla: this.planes_form.value['tipo_actividad'],
+            nombre_actividad: 'Apertura'
+          }];
+          this.objeto = {
+            id_plan_trabajo: this.id_plan_trabajo['id_plan_trabajo'],
+            array_actividades: this.array_actividades
+          };
+          this.http.post(`${this.apiService.ip}/supervisores_api/public/api/InsercionTablaActividad`,
+            this.objeto, { headers: this.navbar.headers }
+          ).subscribe(res => {
+            console.log(res);
+            console.log(this.objeto);
+            const mensaje = JSON.stringify(respuesta['succes']);
+            const mensaje_insercion = JSON.stringify(res['message ']);
+            // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
+            // si no hace esto: pasa a error, donde habrá mas validaciones
+            swal({
+              title: 'Actividad Apertura',
+              text: mensaje +
+                '\n' +
+                '\n' +
+                mensaje_insercion,
+              type: 'success'
+            }).then(result => {
+              // para volver a la pagina anterior...
+              window.history.back();
+              // para recargar pagina...
+              // location.reload();
+            });
+            console.log(respuesta);
           });
-          console.log(respuesta);
         }
       },
         error => {
           if (error.status === 400) {
+            const mensaje = JSON.stringify(error['statusText']);
             swal({
               title: 'Error ' + error.status + ': ' + JSON.stringify(error['statusText']),
-              text: 'inconsistencia con las fechas, asegúrate que las fechas no sean de días antes del día actual.',
+              text: mensaje,
               type: 'error'
             });
             console.log(error);
           } else {
             swal({
               title: 'Datos no enviados',
-              text: JSON.stringify(error),
+              text: JSON.stringify(error['error']['message']),
               type: 'error'
             });
             console.log(error);

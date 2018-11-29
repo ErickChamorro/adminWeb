@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('token')) {
       this.router.navigate(['/dashboard']);
     } else {
-      console.log('no hay token');
+
     }
 
   }

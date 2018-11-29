@@ -62,11 +62,12 @@ export class ZonaComponent implements OnInit {
   crear_plan_de_trabajo(id_sucursal, fecha_creacion, id_supervisor) {
     const data = { id_sucursal, fecha_creacion, id_supervisor };
     this.route.params.subscribe(parametro => {
-      this.datos = parametro['id'];
+      this.datos = parametro;
     });
+    console.log(this.datos);
     this.http.post(`${this.apiService.ip}/supervisores_api/public/api/CrearPlanTrabajo`, data,
       {
-        headers: this.apiService.headers_get
+        headers: this.navbar.headers
       }).subscribe(respuesta => {
         this.id_plan_trabajo = respuesta['id_plan_trabajo'];
         this.router.navigate([`dashboard/zona/${this.datos}/formulario/${this.id_plan_trabajo}`]);

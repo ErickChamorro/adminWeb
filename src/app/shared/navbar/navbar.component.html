@@ -3,14 +3,8 @@
   <nav id="sidebar">
     <div class="sidebar-header">
       <div id="imagen" style="width: 100px; height: 100px;">
-        <img
-          src="../../../assets/imagenes/user_icon.png"
-          width="100"
-          height="100"
-          class="img img-circle img-responsive"
-          alt="coordinador photo"
-          title="aqui va la foto del perfil del coordinador ese"
-        />
+        <img src="../../../assets/imagenes/user_icon.png" width="100" height="100" class="img img-circle img-responsive"
+          alt="coordinador photo" title="aqui va la foto del perfil del coordinador ese" />
       </div>
       <h6>Bienvenido:</h6>
       <h3>
@@ -22,13 +16,7 @@
     <ul class="list-unstyled components">
       <p>Region: {{ coordinador.region | titlecase }}</p>
       <li class="active">
-        <a
-          href="#homeSubmenu"
-          data-toggle="collapse"
-          aria-expanded="false"
-          class="dropdown-toggle"
-          >Home</a
-        >
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
           <li><a [routerLink]="['zona']">Home 1</a></li>
           <li><a [routerLink]="['zonas']">Home 2</a></li>
@@ -37,13 +25,7 @@
       </li>
       <li><a href="#">About</a></li>
       <li>
-        <a
-          href="#pageSubmenu"
-          data-toggle="collapse"
-          aria-expanded="false"
-          class="dropdown-toggle"
-          >Pages</a
-        >
+        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
           <li><a href="#">Page 1</a></li>
           <li><a href="#">Page 2</a></li>
@@ -56,9 +38,7 @@
 
     <ul class="list-unstyled CTAs">
       <li>
-        <a href="#" class="download" [routerLink]="''" (click)="cerrarSesion()"
-          >Cerrar sesión</a
-        >
+        <a href="#" class="download" [routerLink]="''" (click)="cerrarSesion()">Cerrar sesión</a>
       </li>
     </ul>
   </nav>
@@ -73,52 +53,35 @@
         <i class="fas fa-align-justify"></i>
       </button>
       <a id="logo_grande" [routerLink]="['/dashboard']">
-        <h4><i class="fas fa-home"></i> Dashboard</h4>
+        <h4><i class="fas fa-arrow-left"></i></h4>
       </a>
 
       <!--
         BOTON QUE APARECE AL PONERSE EN MODO TELEFONO: BOTON TOGGLE NAVBAR (OJO: NO ES DEL SIDEBAR)
       -->
-      <button
-        mat-icon-button
-        class="d-lg-none"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button mat-icon-button class="d-lg-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <mat-icon>more_vert</mat-icon>
       </button>
 
-      <div
-        class="collapse navbar-collapse text-center"
-        id="navbarSupportedContent"
-      >
+      <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link nav-logo" [routerLink]="['/dashboard']"
-              ><i class="fas fa-home"></i> Dashboard</a
-            >
+            <a class="nav-link nav-logo" [routerLink]="['/dashboard']"><i class="fas fa-home"></i>
+              Dashboard</a>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#"
-              ><i class="fas fa-id-card"></i> Perfil</a
-            >
+            <a class="nav-link" href="#"><i class="fas fa-home"></i> Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"
-              ><i class="fas fa-envelope"></i> Bandeja de mensajes</a
-            >
+            <a class="nav-link" href="#"><i class="fas fa-envelope"></i> Bandeja de mensajes</a>
           </li>
           <!--
             <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
           -->
           <li class="nav-item">
-            <a class="nav-link" [routerLink]="''" (click)="cerrarSesion()"
-              ><i class="fas fa-power-off"></i> Cerrar sesión</a
-            >
+            <a class="nav-link" [routerLink]="''" (click)="cerrarSesion()"><i class="fas fa-power-off"></i> Cerrar
+              sesión</a>
           </li>
         </ul>
       </div>

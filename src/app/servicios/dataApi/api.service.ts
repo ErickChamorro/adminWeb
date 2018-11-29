@@ -58,10 +58,16 @@ export class ApiService {
     }
   }
 
-  // // mostrar prioridad
+  // mostrar prioridad
   public mostrar_prioridad() {
     const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
     return this.http.get(api_url, { headers: this.headers_get });
+  }
+
+  // inseercion
+  public insertar_actividad(valores) {
+    const api_url = `${this.ip}/supervisores_api/public/api/InsercionTablaActividad`;
+    return this.http.post(api_url, valores, { headers: this.headers_get });
   }
 
 }
