@@ -1,54 +1,67 @@
-<div class="row">
-  <div class="col-lg-12">
-    <h2>Zona: {{ parametro_id_zona }}</h2>
+<div class="body">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>Lista de Sucursales</h2>
+    </div>
+    <div class="col-lg-5">
+      <h4>Zona:</h4>
+    </div>
+    <div class="col-lg-6">
+      <h4>{{parametro_id_zona}}</h4>
+    </div>
+    <div class="col-lg-5">
+      <h4>Supervisor a cargo:</h4>
+    </div>
+    <div class="col-lg-6">
+      <h4>{{supervisor_zona}}</h4>
+    </div>
   </div>
-</div>
 
-<br />
+  <br />
 
-<div class="row justify-content-around">
-  <!-- tabla con la lista de droguerias -->
-  <table class="table table-striped table-dark">
-    <!-- CABECERA DE LA TABLA -->
-    <thead>
-      <tr>
-        <th scope="col">Cod. Sucursal</th>
-        <th scope="col">Sucursal</th>
-        <!-- <th scope="col">Id. Sucursal</th> -->
-        <th scope="col">Supervisor</th>
-        <!-- <th scope="col">Id. Supervisor</th> -->
-        <th scope="col">Opciones</th>
-      </tr>
-    </thead>
-    <!-- CUERPO DE LA TABLA -->
-    <tbody>
-      <tr *ngFor="let sucursal of sucursales">
-        <th scope="row">{{ sucursal.cod_sucursal }}</th>
-        <th scope="row">{{ sucursal.sucursal }}</th>
-        <!-- <th scope="row">{{ sucursal.id_suscursal }}</th> -->
-        <th scope="row">{{ sucursal.supervisor }}</th>
-        <!-- <th scope="row">{{ sucursal.id_supervisor }}</th> -->
-        <th scope="row">
-          <!-- ******** BOTON DE OPCIONES *********** -->
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="crear_plan_de_trabajo(sucursal.id_suscursal, fecha_creacion, sucursal.id_supervisor)">
-              <mat-icon>add</mat-icon>
-              <span>Crear plan de trabajo</span>
+  <div class="row justify-content-around">
+    <!-- tabla con la lista de droguerias -->
+    <table class="table table-striped table-dark">
+      <!-- CABECERA DE LA TABLA -->
+      <thead>
+        <tr>
+          <th scope="col">Código de Sucursal</th>
+          <th scope="col">Nombre de Sucursal</th>
+          <!-- <th scope="col">Id. Sucursal</th> -->
+          <!-- <th scope="col">Id. Supervisor</th> -->
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <!-- CUERPO DE LA TABLA -->
+      <tbody>
+        <tr *ngFor="let sucursal of sucursales">
+          <th scope="row">{{ sucursal.cod_sucursal }}</th>
+          <th scope="row">{{ sucursal.sucursal }}</th>
+          <!-- <th scope="row">{{ sucursal.id_suscursal }}</th> -->
+          <!-- <th scope="row">{{ sucursal.supervisor }}</th> -->
+          <!-- <th scope="row">{{ sucursal.id_supervisor }}</th> -->
+          <th scope="row">
+            <!-- ******** BOTON DE OPCIONES *********** -->
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
             </button>
-            <button mat-menu-item [routerLink]="['formulario']">
-              <mat-icon>visibility</mat-icon>
-              <span>Ver planes de trabajo</span>
-            </button>
-            <button mat-menu-item (click)="submit_tester(sucursal.id_supervisor, sucursal.id_suscursal)">
-              <mat-icon>add</mat-icon>
-              <span>plan con metodos, multiples parametros y todo</span>
-            </button>
-          </mat-menu>
-        </th>
-      </tr>
-    </tbody>
-  </table>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="crear_plan_de_trabajo(sucursal.id_suscursal, fecha_creacion, sucursal.id_supervisor)">
+                <mat-icon>add</mat-icon>
+                <span>Crear plan de trabajo</span>
+              </button>
+              <button mat-menu-item [routerLink]="['formulario']">
+                <mat-icon>visibility</mat-icon>
+                <span>Ver planes de trabajo</span>
+              </button>
+              <!-- <button mat-menu-item (click)="submit_tester(sucursal.id_supervisor, sucursal.id_suscursal)">
+                <mat-icon>add</mat-icon>
+                <span>plan con metodos, multiples parametros y todo</span>
+              </button> -->
+            </mat-menu>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

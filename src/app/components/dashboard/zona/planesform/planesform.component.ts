@@ -110,7 +110,7 @@ export class PlanesformComponent implements OnInit {
 
   // ********************************   metodo para enviar los datos a la API de CREAR APERTURA *********************************
   crear_actividad_apertura() {
-    // primero extrae el parametro que viene desde la pagina de zona component, necesario para hacer el POST
+    // primero extrae el parametro donde esta el id plan trabajo que viene desde la pagina de zona component, necesario para hacer el POST
     this.route.params.subscribe(params => {
       this.id_plan_trabajo = params;
       // se hace el POST a la API (Crear Apertura)
@@ -128,16 +128,19 @@ export class PlanesformComponent implements OnInit {
           });
           console.log(respuesta);
         } else {
-          // post insercion aqui?
+          // **********************  INSERCION DE LA ACTIVIDAD QUE SE VAYA A REALIZAR   **********************************
+          // se agrupa en un array los campos que se va a enviar: tiene que ser el mismo nombre que en la base de datos
           this.array_actividades = [{
             id_prioridad: this.planes_form.value['id_prioridad'],
             nombre_tabla: this.planes_form.value['tipo_actividad'],
             nombre_actividad: 'Apertura'
           }];
+          // se crea el objeto final donde reunirá todos los campos
           this.objeto = {
             id_plan_trabajo: this.id_plan_trabajo['id_plan_trabajo'],
             array_actividades: this.array_actividades
           };
+          // finalmente *****************   POST DE LA INSERCION   ************************************
           this.http.post(`${this.apiService.ip}/supervisores_api/public/api/InsercionTablaActividad`,
             this.objeto, { headers: this.navbar.headers }
           ).subscribe(res => {
@@ -146,13 +149,10 @@ export class PlanesformComponent implements OnInit {
             const mensaje = JSON.stringify(respuesta['succes']);
             const mensaje_insercion = JSON.stringify(res['message ']);
             // si esta todo correcto, se notifica en un alert que sus datos han sido enviados.
-            // si no hace esto: pasa a error, donde habrá mas validaciones
+            // si no hace esto: pasa a error, donde habrá mas validaciones sobre el status del error.
             swal({
-              title: 'Actividad Apertura',
-              text: mensaje +
-                '\n' +
-                '\n' +
-                mensaje_insercion,
+              title: 'Plan de trabajo creado exitosamente',
+              // text: mensaje + mensaje_insercion,
               type: 'success'
             }).then(result => {
               // para volver a la pagina anterior...
@@ -160,7 +160,7 @@ export class PlanesformComponent implements OnInit {
               // para recargar pagina...
               // location.reload();
             });
-            console.log(respuesta);
+            // console.log(respuesta);
           });
         }
       },

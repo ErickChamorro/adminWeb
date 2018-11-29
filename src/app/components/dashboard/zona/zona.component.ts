@@ -18,6 +18,7 @@ export class ZonaComponent implements OnInit {
   fecha_creacion: any;
   id_plan_trabajo: any;
   datos: any;
+  supervisor_zona: any;
 
   // variable que contiene el nombre de la zona que se mostrara en este componente
   parametro_id_zona = '';
@@ -42,11 +43,15 @@ export class ZonaComponent implements OnInit {
       this.navbar.get_detalle_zona(data['id']).subscribe(sucursales => {
         // variable donde se guarda el array que muestre las droguerias
         this.sucursales = sucursales['sucursal'];
-        // console.log(this.sucursales);
         // variable donde guarda el nombre de la zona
         this.parametro_id_zona = sucursales['zona']['descripcion_zona'];
+        // variable donde guarda el id de la sucursal
         this.id_zona = sucursales['sucursal']['0']['id_suscursal'];
+        // variable donde guarda el nombre del supervisor a cargo que servira para mostrarlo en un titulo
+        this.supervisor_zona = sucursales['sucursal']['0']['supervisor'];
         // console.log(this.id_zona);
+        // console.log(this.parametro_id_zona);
+        // console.log(this.supervisor_zona);
 
         // si quieres ver que nombre de la zona es en la consola descomenta la linea de abajo
         // console.log(this.sucursales);
