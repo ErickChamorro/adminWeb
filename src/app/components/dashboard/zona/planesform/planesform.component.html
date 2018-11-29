@@ -7,15 +7,43 @@
 </div>
 <br />
 <div class="row">
-  <div class="contenedor-tabla align-content-around">
+  <div class="col-lg-4 col-md-12">
+    <h5>
+      <mat-checkbox id="check_apertura" color="primary" value="apertura">
+        1. Apertura del punto de venta
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_documentacion" color="primary" value="documentacion">
+        2. Ingreso a la sucursal
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_papeleria" color="primary" value="kardex">
+        3. papeleria y documentos
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_kardex" color="primary" value="kardex">
+        4. Revisión de kardex y elaboración
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_pedidos" color="primary" value="kardex">
+        5. Evaluación de pedidos
+      </mat-checkbox>
+    </h5>
+
+  </div>
+  <div class="col-lg-8 col-md-12">
     <form [formGroup]="planes_form" id="formulario">
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-lg-6"></div>
       </div>
       <div class="row">
         <div class="divider"></div>
         <br>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-lg-5 form-group">
           <label for="">Actividad:</label>

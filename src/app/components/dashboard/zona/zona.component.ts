@@ -82,5 +82,6 @@ export class ZonaComponent implements OnInit {
         console.log(data);
         console.log(error);
       });
+    // this.router.navigate([`dashboard/zona/${this.datos}/formulario`]);
   }
 }
