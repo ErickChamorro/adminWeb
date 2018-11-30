@@ -24,11 +24,6 @@
   padding: 7%;
   height: 58%;
   margin-top: 20%;
-  /* background: #02547D; */
-  /* background: rgba(255, 255, 255, 0.5); */
-  /* border-radius: 5px; */
-  /* border-top: 30px solid #02547d; */
-  /* box-shadow: 0px 3px 5px #252525; */
 }
 
 .mini_caja{
@@ -51,6 +46,10 @@
   padding-right: 100px;
 }
 
+/* FORMA DE HACER UNA FLECHA QUE APARECE EN LA CAJA DE LADO IZQUIERDO */
+/* SOLAMENTE ESCOGE UN CONTENEDOR (EN ESTE CASO: LADO IZQUIERDO) E INCLUYE EL ESTADO BEFORE Y COLOCA ESAS PROPIEDADES */
+/* PUEDES MODIFICAR EL LADO DE LA FLECHA CAMBIANDO LA PROPIEDAD (LEFT) POR: TOP O ARRIBA O BOTTOM */
+/* PUEDES CAMBIAR DE TAMAÑO BAJANDOLE O SUBIENDOLE DE A 10PX LAS PROPIEDADES: BORDER-TOP, BORDER-LEFT Y BORDER-BOTTOM  */
 .lado-izquierdo:before {
   content: "";
   position: absolute;
