@@ -16,14 +16,8 @@ import { ApiService } from '../../servicios/dataApi/api.service';
 })
 export class HomeComponent implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
-  respuesta: any;
-  public respuesta_servidor: boolean;
-  disabled: boolean;
   data: any;
   usuario_coordinador: CoordinadorInterface;
-  current_user: any;
-
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -41,28 +35,19 @@ export class HomeComponent implements OnInit {
       region: ''
     };
 
-    this.respuesta_servidor = true;
-
     // validador del formulario de login
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(6), Validators.maxLength(20)]
-      ]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
     });
   }
 
   ngOnInit() {
-    // para desactivar el boton al cargar la pagina
-    // despues se pondrá en true hasta que los datos que se haya llenado en el formulario sean validos
-    this.disabled = true;
-
     // AL INICIAR LA PAGINA SE CARGA ESTE SPINNER PRIMERO, DESPUES SE CARGA EL LOGIN
     this.spinner.show();
 
     setTimeout(() => {
-      /** spinner ends after 5 seconds */
+      /** spinner ends after 1 second */
       this.spinner.hide();
     }, 1000);
 
@@ -76,11 +61,6 @@ export class HomeComponent implements OnInit {
 
   }
 
-  // accede a los controles de loginform
-  get form() {
-    return this.loginForm.controls;
-  }
-
   // manejador de envios: muestra en consola como sera enviado los datos
   submit_handler() {
     console.log(this.loginForm.value);
@@ -89,11 +69,6 @@ export class HomeComponent implements OnInit {
   // metodo que se ejecuta al presionar el boton de iniciar en el HTML
   // *******************************      LOGIN (el LOGOUT está en navbar.component.ts )       *************************
   iniciarSesion() {
-    this.submitted = true;
-
-    // se volvera desactivar el boton para prevenir que el usuario clickee mas de una vez
-    this.disabled = true;
-
     // si formulario es invalido
     if (this.loginForm.invalid) {
       // opcional si se quiere poner un SWEETALERT o dejar el alert ordinario

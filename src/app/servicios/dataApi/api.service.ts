@@ -50,8 +50,9 @@ export class ApiService {
   comprobar_token() {
     const token_string = localStorage.getItem('token');
     if (!isNullOrUndefined(token_string)) {
-      const Token = token_string;
-      return Token;
+      // const Token = token_string;
+      // return Token;
+      return true;
     } else {
       return null;
     }

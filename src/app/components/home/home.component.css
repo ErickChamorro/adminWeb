@@ -10,6 +10,10 @@
   overflow-x: hidden;
 }
 
+p{
+  font-size: 25px;
+}
+
 .error {
   color: red;
   font-family: 'Google Sans', sans-serif;
@@ -18,19 +22,46 @@
 .caja {
   width: 70%;
   padding: 7%;
-  margin-top: 15%;
+  height: 58%;
+  margin-top: 20%;
   /* background: #02547D; */
-  background: rgba(255, 255, 255, 0.5);
+  /* background: rgba(255, 255, 255, 0.5); */
   /* border-radius: 5px; */
   /* border-top: 30px solid #02547d; */
   /* box-shadow: 0px 3px 5px #252525; */
 }
 
-.lado-izquierdo {
+.mini_caja{
+  display: none;
+  height: 150px;
+  position: absolute;
+  margin-top: 8%;
   color: white;
+}
+
+.lado-izquierdo {
+  color: #272727;
   text-align: center;
   align-items: center;
-  margin-top: 15%;
+  padding-top: 15%;
+  background: #ffffff;
+  width: 100%;
+  height: 100vh;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.lado-izquierdo:before {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 45%;
+  width: 0;
+  height: 0;
+  border-top: 33px solid transparent;
+  /* border-right: 26px solid #09A1DA; */
+  border-left: 46px solid #ffffff;
+  border-bottom: 33px solid transparent;
 }
 
 .lado-derecho {
@@ -55,7 +86,7 @@
 #forgot {
   text-decoration: none;
   display: block;
-  color: #09A1DA;
+  color: white;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   background: none;
@@ -63,6 +94,8 @@
   text-align: center;
   width: 100%;
   margin-top: 30px;
+  border-bottom: 1px dotted white;
+  padding-bottom: 20px;
 }
 
 #forgot:hover {
@@ -75,6 +108,11 @@
 @media screen and (max-width: 1110px) {
   .lado-izquierdo {
     padding-left: 40px;
+    padding-top: 25%;
+  }
+
+  .caja {
+    margin-top: 30%;
   }
 }
 
@@ -86,6 +124,14 @@
   .lado-derecho {
     margin-left: 12%;
   }
+
+  .lado-derecho .caja{
+    margin-top: 40%;
+  }
+
+  .mini_caja{
+    display: block;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -95,5 +141,19 @@
 
   .lado-derecho {
     margin-left: 0;
+  }
+
+  .lado-derecho .caja{
+    margin-top: 50%;
+  }
+
+  .lado-derecho .mini_caja{
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .lado-derecho .caja{
+    margin-top: 68%;
   }
 }

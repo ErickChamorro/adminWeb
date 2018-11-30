@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
             'No es posible entrar si su rol no es COORDINADOR o ADMINISTRADOR!',
           type: 'error'
         });
-        localStorage.removeItem('token');
+        localStorage.clear();
         this.router.navigate(['']);
         // descomenta la linea de abajo para ver los errores
         // console.log(error);
