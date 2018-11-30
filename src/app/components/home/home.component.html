@@ -7,7 +7,7 @@
       <!-- CONTENEDOR DE LA IZQUIERDA -->
       <div class="col-lg-6 col-md-3 col-sm-12 col-xs-12 lado-izquierdo">
         <h1>Bienvenido!</h1>
-        <p>
+        <p class="texto">
           Sistema de gestión y manejo de usuarios supervisores y planes de
           trabajo.
         </p>
@@ -21,7 +21,7 @@
         -->
         <div class="mini_caja">
           <h1>Bienvenido</h1>
-          <p>Sistema de gestión y manejo de usuarios supervisores y planes de trabajo.<br />
+          <p class="texto">Sistema de gestión y manejo de usuarios supervisores y planes de trabajo.<br />
             imagen de prueba.</p>
         </div>
         <div class="caja">
@@ -43,7 +43,7 @@
               <input type="password" name="password" id="password" class="form-control" formControlName="password"
                 placeholder="* * * * * * * * * *" />
               <p class="error" *ngIf="loginForm.controls['password'].errors?.required && loginForm.controls['password'].touched">
-                completa este campo tambien.
+                completa este campo también.
               </p>
             </div>
             <br />
