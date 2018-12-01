@@ -1,54 +1,38 @@
-<ngx-spinner
-  bdColor="rgba(51, 51, 51, 0.8)"
-  size="large"
-  color="#fff"
-  type="ball-circus"
->
-  <p style="font-size: 20px; color: white">Cargando...</p></ngx-spinner
->
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-circus">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
 <div class="animated fadeIn delay-1s">
   <div class="body">
     <div class="row">
       <!-- CONTENEDOR DE LA IZQUIERDA -->
       <div class="col-lg-6 col-md-3 col-sm-12 col-xs-12 lado-izquierdo">
-        <h1>hola!</h1>
-        <p>
-          sistema de gestion y manejo de usuarios supervisores y planes de
-          trabajo. <br />
-          <br />
-          imagen de prueba.
+        <h1>Bienvenido!</h1>
+        <p class="texto">
+          Sistema de gestión y manejo de usuarios supervisores y planes de
+          trabajo.
         </p>
       </div>
       <!-- FIN CONTENEDOR IZQUIERDA -->
 
       <!-- CONTENEDOR DEL LADO DERECHO -->
-      <div
-        class="col-lg-6 col-md-9 col-sm-12 col-xs-12 lado-derecho d-flex justify-content-center"
-      >
+      <div class="col-lg-6 col-md-9 col-sm-12 col-xs-12 lado-derecho d-flex justify-content-center">
         <!--
           CAJA QUE CONTIENE EL FORMULARIO DE LOGIN (EL QUE TIENE COLOR BLANCO TRANSPARENTE)
         -->
+        <div class="mini_caja">
+          <h1>Bienvenido</h1>
+          <p class="texto">Sistema de gestión y manejo de usuarios supervisores y planes de trabajo.<br />
+            imagen de prueba.</p>
+        </div>
         <div class="caja">
           <!-- FORMULARIO DE LOGIN -->
           <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
             <!-- NOMBRE DE USUARIO (PONER EL CORREO) -->
             <div class="form-group">
               <label for="username">Nombre de usuario: </label>
-              <input
-                type="email"
-                name="username"
-                id="username"
-                class="form-control"
-                formControlName="username"
-                placeholder="Direccion de correo electrónico"
-              />
-              <p
-                class="error"
-                *ngIf="
-                  loginForm.controls.username.errors?.required &&
-                  loginForm.controls.username.touched
-                "
-              >
+              <input type="email" name="username" id="username" class="form-control" formControlName="username"
+                placeholder="Direccion de correo electrónico" />
+              <p class="error" *ngIf="loginForm.controls['username'].errors?.required && loginForm.controls['username'].touched">
                 completa este campo.
               </p>
             </div>
@@ -56,33 +40,16 @@
             <!-- CONTRASEÑA -->
             <div class="form-group">
               <label for="password">Contraseña:</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                class="form-control"
-                formControlName="password"
-                placeholder="* * * * * * * * * *"
-              />
-              <p
-                class="error"
-                *ngIf="
-                  loginForm.controls.password.errors?.required &&
-                  loginForm.controls.password.touched
-                "
-              >
-                completa este campo tambien.
+              <input type="password" name="password" id="password" class="form-control" formControlName="password"
+                placeholder="* * * * * * * * * *" />
+              <p class="error" *ngIf="loginForm.controls['password'].errors?.required && loginForm.controls['password'].touched">
+                completa este campo también.
               </p>
             </div>
             <br />
             <!-- BOTON ENVIAR -->
             <div class="form-group">
-              <button
-                id="btnIniciar"
-                mat-raised-button
-                type="submit"
-                [disabled]="!loginForm.valid"
-              >
+              <button id="btnIniciar" mat-raised-button [disabled]="!loginForm.valid">
                 Iniciar sesion
               </button>
             </div>
@@ -92,12 +59,10 @@
             BOTON DE OLVIDE MI CONTRASEÑA *NO PONERLO DENTRO DEL FORMULARIO
           -->
           <button id="forgot" (click)="olvide_mi_contrasenia()">
-            ¿olvidó su contraseña?
+            ¿Olvidó su contraseña? Click aquí.
           </button>
-        </div>
-        <!-- FIN CAJA FORMULARIO -->
-      </div>
-      <!-- FIN CONTENEDOR LADO DERECHO -->
+        </div><!-- FIN CAJA FORMULARIO -->
+      </div><!-- FIN CONTENEDOR LADO DERECHO -->
     </div>
   </div>
 </div>

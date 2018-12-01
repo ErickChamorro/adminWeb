@@ -9,26 +9,25 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   // ip = 'http://192.168.1.4'; // servidor SENTOS
-  // ip = 'http://192.168.1.64';    // servidor cudris
-  ip = 'http://192.168.1.185';
+  ip = 'http://192.168.1.185';  // servidor jonathan
 
   // ----------  CABECERA GET  ---------------
-  headers_get: HttpHeaders = new HttpHeaders({
+  public headers_get: HttpHeaders = new HttpHeaders({
     Accept: 'application/json',
     Authorization: 'Bearer' + ' ' + localStorage.getItem('token')
   });
 
   // ----------  CABECERA POST   -----------------
-  headers_post: HttpHeaders = new HttpHeaders({
+  public headers_post: HttpHeaders = new HttpHeaders({
     Authorization: 'Access',
     'Content-Type': 'application/json'
   });
 
   // ----------  CABECERA PLANES POST ------------
-  headers_planes: HttpHeaders = new HttpHeaders({
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  });
+  // public headers_planes: HttpHeaders = new HttpHeaders({
+  //   Accept: 'application/json',
+  //   'Content-Type': 'application/json'
+  // });
 
   // api Login
   // esa está en el Homecomponent.ts
@@ -51,17 +50,24 @@ export class ApiService {
   comprobar_token() {
     const token_string = localStorage.getItem('token');
     if (!isNullOrUndefined(token_string)) {
-      const Token = token_string;
-      return Token;
+      // const Token = token_string;
+      // return Token;
+      return true;
     } else {
       return null;
     }
   }
 
-  // // mostrar prioridad
-  // mostrar_prioridad() {
-  //   const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
-  //   return this.http.get(api_url, { headers: this.headers_get });
-  // }
+  // mostrar prioridad
+  public mostrar_prioridad() {
+    const api_url = `${this.ip}/supervisores_api/public/api/MostrarPrioridad`;
+    return this.http.get(api_url, { headers: this.headers_get });
+  }
+
+  // inseercion
+  public insertar_actividad(valores) {
+    const api_url = `${this.ip}/supervisores_api/public/api/InsercionTablaActividad`;
+    return this.http.post(api_url, valores, { headers: this.headers_get });
+  }
 
 }

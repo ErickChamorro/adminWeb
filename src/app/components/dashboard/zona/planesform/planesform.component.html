@@ -1,31 +1,78 @@
 <div class="row">
   <div class="col-lg-12">
     <h2>
-      Gestor de planes de trabajo para: <i>{{ nombre_sucursal }}</i>
+      Gestor de planes de trabajo para: <i></i>
     </h2>
   </div>
 </div>
 <br />
 <div class="row">
-  <div class="contenedor-tabla align-content-around">
-    <form [formGroup]="apertura_form" id="formulario">
-      <div class="row">
-        <div class="col-lg-12 form-group">
-          <h4>
-            <mat-checkbox id="check_apertura" data-target=".form_apertura">
-              Apertura
-            </mat-checkbox>
-          </h4>
-        </div>
+  <div class="col-lg-4 col-md-12">
+    <h5>
+      <mat-checkbox id="check_apertura" color="primary" value="apertura">
+        1. Apertura del punto de venta
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_documentacion" color="primary" value="documentacion">
+        2. Ingreso a la sucursal
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_papeleria" color="primary" value="kardex">
+        3. papeleria y documentos
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_kardex" color="primary" value="kardex">
+        4. Revisión de kardex y elaboración
+      </mat-checkbox>
+    </h5>
+    <h5>
+      <mat-checkbox id="check_pedidos" color="primary" value="kardex">
+        5. Evaluación de pedidos
+      </mat-checkbox>
+    </h5>
+
+  </div>
+  <div class="col-lg-8 col-md-12">
+    <form [formGroup]="planes_form" id="formulario">
+      <!-- <div class="row">
+        <div class="col-lg-6"></div>
       </div>
       <div class="row">
         <div class="divider"></div>
         <br>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-lg-5 form-group">
-          <label>Id. plan de trabajo:</label><br>
-          <input class="form-control" formControlName="id_plan_trabajo" type="text" value="" readonly />
+          <label for="">Actividad:</label>
+          <select name="" id="" class="form-control" data-size="auto" formControlName="tipo_actividad">
+            <option value="null" selected>Seleccione...</option>
+            <option value="apertura">1. Apertura del punto de venta</option>
+            <option value="ingreso">2. Ingreso a la sucursal</option>
+            <option value="papeleria">3. Papelería y documentos</option>
+            <option value="kardex">4. Revisión de Kardex y elaboración</option>
+            <option value="pedidos">5. Evaluación de pedidos</option>
+            <option value="presupuestos">6. Presupuestos de pedidos</option>
+            <option value="faltantes">7. Libros de faltantes</option>
+            <option value="seguimiento">8. Seguimiento a vendedores</option>
+            <option value="productos">9. Productos indicados</option>
+            <option value="informe">10. Entrega de informe</option>
+            <option value="revision">11. Revisión de libro y agenda del cliente</option>
+            <option value="inventario">12. Revisión completa de los inventarios</option>
+            <option value="excesos">13. Excesos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option>
+          </select>
         </div>
         <div class="col-lg-5 form-group">
           <label for="prioridad">Prioridad:</label> <br />
@@ -52,14 +99,12 @@
               <input class="form-control" type="date" formControlName="fecha_fin" name="fin" id="fin" placeholder="dd/mm/aa" />
             </div>
             <div class="col-lg-1 col-sm-1 col-1 form-group">
-              <button mat-mini-fab class="botones" id="btnAgregar" data-content="Agregar fechas" rel="popover"
-                data-placement="top" (click)="agregar_fechas()">
+              <button mat-mini-fab class="botones" id="btnAgregar" name="btnAgregar" title="agregar fechas" (click)="agregar_fechas()">
                 <mat-icon>add</mat-icon>
               </button>
             </div>
             <div class="col-lg-1 col-sm-1 col-1 form-group">
-              <button mat-mini-fab class="botones" id="btnEliminar" data-content="Eliminar" rel="popover"
-                data-placement="top" (click)="eliminar_fechas(i)">
+              <button mat-mini-fab class="botones" id="btnEliminar" title="eliminar fechas" (click)="eliminar_fechas(i)">
                 <mat-icon>close</mat-icon>
               </button>
             </div>
@@ -69,18 +114,19 @@
       <br>
       <div class="row">
         <div class="col-lg-12">
-          <button mat-button id="btnEnviar" (click)="crear_actividad_apertura()" value="Crear actividad Apertura">Crear
-            actividad Apertura</button>
+          <button mat-button id="btnEnviar" name="btnEliminar" (click)="submit_handler()" value="Crear actividad Apertura">Crear
+            actividad</button>
         </div>
       </div>
     </form>
   </div>
+</div>
 
 
 
 
 
-  <!-- <form [formGroup]="planesform" (ngSubmit)="simular_envio()" id="formulario">
+<!-- <form [formGroup]="planesform" (ngSubmit)="simular_envio()" id="formulario">
         <div class="row justify-content-between align-items-center form_apertura_checked">
           <div class="col-9">
             <h4>

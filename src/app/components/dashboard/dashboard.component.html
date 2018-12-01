@@ -1,6 +1,8 @@
 <!-- SOLO CONTENIDO DE LA PAGINA DE DASHBOARD -->
 <div class="row">
-  <div class="col-lg-12"><h2>Zonas</h2></div>
+  <div class="col-lg-12">
+    <h2>Lista de zonas</h2>
+  </div>
 </div>
 <br />
 <!-- FILA -->
@@ -17,9 +19,7 @@
             Supervisor a cargo: {{ zona.supervisor }}
           </h6>
           <!-- aqui podria ir un texto -->
-          <a class="card-link" [routerLink]="['zona', zona.id_zona]"
-            >Ver zona</a
-          >
+          <a class="card-link" [routerLink]="['zona', zona.id_zona]">Ver zona</a>
           <!-- <a href="#" class="card-link">Another link</a> -->
         </div>
       </div>

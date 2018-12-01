@@ -8,7 +8,7 @@ import { ApiService } from '../servicios/dataApi/api.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) { }
 
   canActivate() {
     if (this.apiService.comprobar_token()) {
