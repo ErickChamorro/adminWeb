@@ -133,7 +133,7 @@ export class HomeComponent implements OnInit {
             } else {
               swal({
                 title: 'Error',
-                text: 'Algo raro pasa... ',
+                text: 'Algo raro pasa... ' + JSON.stringify(error['message']),
                 type: 'error'
               });
               // console.log(JSON.stringify(error));
