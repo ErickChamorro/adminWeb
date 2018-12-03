@@ -55,7 +55,7 @@ a:focus {
   left: 0;
   height: 100vh;
   z-index: 999;
-  background-image: linear-gradient(#272727, #777777);
+  background-image: linear-gradient(#01579B, dodgerblue);
   color: #fff;
   transition: all 0.3s;
   -webkit-box-shadow: 3px 0px 4px 0px rgba(0,0,0,0.4);
