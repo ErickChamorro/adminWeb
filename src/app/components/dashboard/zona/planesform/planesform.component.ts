@@ -18,6 +18,8 @@ export class PlanesformComponent implements OnInit {
   planes_form: FormGroup;
   // variable donde guarda los campos que la actividad APERTURA necesita
   apertura_form: FormGroup;
+  // form checks
+  check_form: FormGroup;
   // variable donde guarda el id de la sucursal a la que se enviará el plan de trabajo
   id_sucursal: any;
   // variable donde guarda el id supervisor
@@ -27,6 +29,7 @@ export class PlanesformComponent implements OnInit {
   // variable donde guardará la lista de prioridades que se usará en un select y de ahi sacar el ID de cada prioridad
   prioridades: any;
 
+  tipo: any;
   array_actividades = {};
   objeto = {};
   number: any;
@@ -38,12 +41,47 @@ export class PlanesformComponent implements OnInit {
     public apiService: ApiService,
     private http: HttpClient
   ) {
+    this.check_form = this.formBuilder.group({
+      apertura: [],
+      acto_dos: [],
+      acto_tres: []
+    });
     // grupo donde contiene TODOS los campos
     this.planes_form = this.formBuilder.group({
       tipo_actividad: [],
       id_prioridad: [],
       array_fechas_apertura: this.formBuilder.array([this.grupo_fechas()])
     });
+  }
+
+  submit() {
+    if (this.check_form.value['apertura'] === true) {
+      console.log('se creo actividad apertura');
+      console.log(this.planes_form.value);
+      localStorage.setItem('nombre_actividad', this.check_form.value['apertura']);
+      localStorage.setItem('fechas', JSON.stringify(this.planes_form.value));
+      this.check_form.reset();
+      this.planes_form.reset();
+    }
+    if (this.check_form.value['acto_dos'] === true) {
+      console.log('se creo actividad del acto dos');
+      console.log(this.check_form.value);
+    }
+    if (this.check_form.value['acto_tres'] === true) {
+      console.log('se creo actividad del acto tres');
+    }
+
+    this.check_form.reset();
+  }
+
+  subirlo_ya() {
+    const actividad = localStorage.getItem('nombre_actividad');
+    const fechas = localStorage.getItem('fechas');
+    const objeto = {
+      nombre_actividad: actividad,
+      fechas: fechas
+    };
+    console.log(objeto);
   }
 
   ngOnInit() {
@@ -156,9 +194,10 @@ export class PlanesformComponent implements OnInit {
               type: 'success'
             }).then(result => {
               // para volver a la pagina anterior...
-              window.history.back();
+              // window.history.back();
               // para recargar pagina...
-              // location.reload();
+              location.reload();
+              // window.history.go(-1);
             });
             // console.log(respuesta);
           });
@@ -166,10 +205,11 @@ export class PlanesformComponent implements OnInit {
       },
         error => {
           if (error.status === 400) {
-            const mensaje = JSON.stringify(error['statusText']);
+            // const mensaje = JSON.stringify(error['statusText']);
+            const descripcion_error = JSON.stringify(error['error']['error']);
             swal({
               title: 'Error ' + error.status + ': ' + JSON.stringify(error['statusText']),
-              text: mensaje,
+              text: descripcion_error,
               type: 'error'
             });
             console.log(error);

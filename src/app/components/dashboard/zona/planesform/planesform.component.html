@@ -1,40 +1,30 @@
 <div class="row">
   <div class="col-lg-12">
     <h2>
-      Gestor de planes de trabajo para: <i></i>
+      Gestor de actividades
     </h2>
   </div>
+  <!-- <div class="col-lg-12">
+    <h4>Seleccione la / las actividades que el supervisor realizará.</h4>
+  </div> -->
 </div>
 <br />
 <div class="row">
-  <div class="col-lg-4 col-md-12">
-    <h5>
-      <mat-checkbox id="check_apertura" color="primary" value="apertura">
-        1. Apertura del punto de venta
-      </mat-checkbox>
-    </h5>
-    <h5>
-      <mat-checkbox id="check_documentacion" color="primary" value="documentacion">
-        2. Ingreso a la sucursal
-      </mat-checkbox>
-    </h5>
-    <h5>
-      <mat-checkbox id="check_papeleria" color="primary" value="kardex">
-        3. papeleria y documentos
-      </mat-checkbox>
-    </h5>
-    <h5>
-      <mat-checkbox id="check_kardex" color="primary" value="kardex">
-        4. Revisión de kardex y elaboración
-      </mat-checkbox>
-    </h5>
-    <h5>
-      <mat-checkbox id="check_pedidos" color="primary" value="kardex">
-        5. Evaluación de pedidos
-      </mat-checkbox>
-    </h5>
-
+  <div class="col-lg-12">
+    <h6>Seleccione una actividad que el supervisor realizará.
+      <br>
+      Después elija una o más fechas para la realización de la(s) actividad(es) escogida(s).
+    </h6>
+    <hr>
   </div>
+  <!-- <form [formGroup]="check_form">
+    <div class="col-lg-4 col-md-12" style="padding-top: 10%;">
+      <input type="checkbox" id="checkbox-1" formControlName="apertura" />hola
+      <input type="checkbox" id="checkbox-2" formControlName="acto_dos" />mundo
+      <input type="checkbox" id="checkbox-3" formControlName="acto_tres" />como estan
+    </div>
+    <button type="button" (click)="submit()">agregar</button>
+  </form> -->
   <div class="col-lg-8 col-md-12">
     <form [formGroup]="planes_form" id="formulario">
       <!-- <div class="row">
@@ -50,7 +40,7 @@
           <select name="" id="" class="form-control" data-size="auto" formControlName="tipo_actividad">
             <option value="null" selected>Seleccione...</option>
             <option value="apertura">1. Apertura del punto de venta</option>
-            <option value="ingreso">2. Ingreso a la sucursal</option>
+            <!-- <option value="ingreso">2. Ingreso a la sucursal</option>
             <option value="papeleria">3. Papelería y documentos</option>
             <option value="kardex">4. Revisión de Kardex y elaboración</option>
             <option value="pedidos">5. Evaluación de pedidos</option>
@@ -71,7 +61,7 @@
             <option value="vencimientos">14. Libro de vencimientos</option>
             <option value="vencimientos">14. Libro de vencimientos</option>
             <option value="vencimientos">14. Libro de vencimientos</option>
-            <option value="vencimientos">14. Libro de vencimientos</option>
+            <option value="vencimientos">14. Libro de vencimientos</option> -->
           </select>
         </div>
         <div class="col-lg-5 form-group">

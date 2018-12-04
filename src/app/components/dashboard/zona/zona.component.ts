@@ -65,17 +65,25 @@ export class ZonaComponent implements OnInit {
   }
 
   crear_plan_de_trabajo(id_sucursal, fecha_creacion, id_supervisor) {
+    // array donde estará los parametros que se necesita para hacer el POST a la api de CREAR_PLAN_TRABAJO
+    // será el cuerpo de la ruta
     const data = { id_sucursal, fecha_creacion, id_supervisor };
+    // para ingresar a la ruta del formulario ,tengo que volver a extraer el id de la zona a la cual escogi antes
+    // para asi poder hacer el route.navigate a dicha ruta
     this.route.params.subscribe(parametro => {
+      // variable donde esta el id de la zona que escogi (perdon por no poner el nombre adecuado de la variable)
       this.datos = parametro;
     });
-    console.log(this.datos);
+    // console.log(this.datos);
+    // **************************    POST CREAR PLAN DE TRABAJO     **************************************
     this.http.post(`${this.apiService.ip}/supervisores_api/public/api/CrearPlanTrabajo`, data,
       {
         headers: this.navbar.headers
       }).subscribe(respuesta => {
+        // variable donde guarda el dato que recibo de la API
         this.id_plan_trabajo = respuesta['id_plan_trabajo'];
-        this.router.navigate([`dashboard/zona/${this.datos}/formulario/${this.id_plan_trabajo}`]);
+        // ingresar al formulario con los parametros ya reunidos
+        this.router.navigate([`dashboard/zona/${this.datos['id']}/formulario/${this.id_plan_trabajo}`]);
         // console.log(this.id_plan_trabajo);
         console.log(respuesta);
       }, error => {
@@ -83,5 +91,6 @@ export class ZonaComponent implements OnInit {
         console.log(error);
       });
     // this.router.navigate([`dashboard/zona/${this.datos}/formulario`]);
+    // console.log(this.route);
   }
 }
