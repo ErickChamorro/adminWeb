@@ -8,8 +8,8 @@ import { isNullOrUndefined } from 'util';
 export class ApiService {
   constructor(private http: HttpClient) { }
 
-  // ip = 'http://192.168.1.4'; // servidor SENTOS
-  ip = 'http://192.168.1.185';  // servidor jonathan
+  ip = 'http://192.168.1.4'; // servidor SENTOS
+  // ip = 'http://192.168.1.185';  // servidor jonathan
 
   // ----------  CABECERA GET  ---------------
   public headers_get: HttpHeaders = new HttpHeaders({

@@ -17,17 +17,9 @@ const routes: Routes = [
     path: 'dashboard',
     component: NavbarComponent,
     children: [
-      { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-      {
-        path: 'zona/:id',
-        component: ZonaComponent,
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'zona/:id/formulario/:id_plan_trabajo',
-        component: PlanesformComponent,
-        canActivate: [AuthGuard]
-      }
+      { path: '', component: DashboardComponent },
+      { path: 'zona/:id', component: ZonaComponent },
+      { path: 'zona/:id/formulario/:id_plan_trabajo', component: PlanesformComponent }
     ]
   },
   { path: 'error/401', component: Error401Component }

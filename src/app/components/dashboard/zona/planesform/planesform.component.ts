@@ -102,7 +102,8 @@ export class PlanesformComponent implements OnInit {
       array_fechas_apertura: [this.array_fechas]
     });
     if (this.actividad.value === 'apertura') {
-      this.crear_actividad_apertura();
+      // this.crear_actividad_apertura();
+      console.log(this.apertura_form.value);
     } else {
       alert('esa actividad....no existe');
     }
